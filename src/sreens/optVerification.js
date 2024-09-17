@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-
+import colors from '../helper/constant';
 const OTPScreen = ({ route, navigation }) => {
   // const { mobileNumber } = route.params;
   const mobileNumber = '12345670987'
@@ -29,7 +29,7 @@ const OTPScreen = ({ route, navigation }) => {
       <Text style={styles.subHeader}>OTP sent to {mobileNumber} </Text>
 
       <TextInput
-        style={[styles.input, isFocus && {borderWidth:1, borderColor:'#6e00ff'}]}
+        style={[styles.input, isFocus && {borderWidth:1, borderColor:colors.ThemeText}]}
         placeholder="Enter OTP"
         keyboardType="numeric"
         maxLength={6}
@@ -52,12 +52,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: colors.ThemeBG,
   },
   design_container:{
     flex:0.6,
     width:'100%',
-    backgroundColor:"#f0f0f0",
     borderBottomLeftRadius:50,
     borderBottomRightRadius:50,
     shadowColor:"black",
@@ -80,12 +79,12 @@ header: {
   fontSize: 25,
   fontWeight: 'bold',
   marginBottom: 10,
-  color: '#6e00ff',
+  color:colors.ThemeText,
 },
   subHeader: {
     fontSize: 16,
     marginBottom: 20,
-    color: '#6e00ff',
+    color: colors.ThemeText,
   },
   input: {
     width: '80%',
@@ -99,7 +98,7 @@ header: {
     fontSize:16,
   },
   button: {
-    backgroundColor: '#6e00ff',
+    backgroundColor:colors.ThemeText,
     paddingVertical: 13,
     paddingHorizontal: 25,
     borderRadius: 6,

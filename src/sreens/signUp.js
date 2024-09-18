@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, Image, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../helper/constant';
+import { useToast } from 'react-native-toast-notifications';
 
 const SignUp = ({ navigation }) => {
+    const Toast = useToast();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
@@ -14,22 +16,46 @@ const SignUp = ({ navigation }) => {
     const handleSignup = () => {
         // Validate inputs
         if (!username || !email || !mobileNumber) {
-            alert('Please fill all fields');
+            Toast.show("Please fill all fields", {
+                type: "warning",
+                placement: "bottom",
+                duration: 1300,
+                offset: 30,
+                animationType: "slide-in",
+            });
             return;
         }
 
         if (!validateEmail(email)) {
-            alert('Please enter a valid email');
+            Toast.show("Please enter a valid email", {
+                type: "warning",
+                placement: "bottom",
+                duration: 1300,
+                offset: 30,
+                animationType: "slide-in",
+            });
             return;
         }
 
         if (mobileNumber.length !== 10) {
-            alert('Please enter a valid 10-digit mobile number');
+            Toast.show("Please enter a valid 10-digit mobile number", {
+                type: "warning",
+                placement: "bottom",
+                duration: 1300,
+                offset: 30,
+                animationType: "slide-in",
+            });
             return;
         }
 
         // Add signup logic here
-        alert('Signup successful');
+        Toast.show("Signup successful!", {
+            type: "success",
+            placement: "bottom",
+            duration: 1300,
+            offset: 30,
+            animationType: "slide-in",
+        });
         navigation.navigate('login');
     };
 
@@ -41,56 +67,56 @@ const SignUp = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-                <View style={styles.container}>
-                    <View style={styles.design_container}>
-                        <View style={styles.image_container}>
-                            <Image source={require('../assets/images/login1.jpg')} style={styles.image} />
-                        </View>
-                    </View>
-
-                    <View style={styles.felds_container}>
-                        <Text style={styles.header}>Sign Up</Text>
-
-                        <TextInput
-                            style={[styles.input, isFocus1 && { borderWidth: 1, borderColor:colors.ThemeText }]}
-                            placeholder="Username"
-                            value={username}
-                            onChangeText={setUsername}
-                            onFocus={() => setIsFocus1(true)}
-                            onBlur={() => setIsFocus1(false)}
-                        />
-
-                        <TextInput
-                            style={[styles.input, isFocus2 && { borderWidth: 1, borderColor:colors.ThemeText }]}
-                            placeholder="Email"
-                            keyboardType="email-address"
-                            value={email}
-                            onChangeText={setEmail}
-                            onFocus={() => setIsFocus2(true)}
-                            onBlur={() => setIsFocus2(false)}
-                        />
-
-                        <TextInput
-                            style={[styles.input, isFocus3 && { borderWidth: 1, borderColor: colors.ThemeText }]}
-                            placeholder="Mobile Number"
-                            keyboardType="numeric"
-                            maxLength={10}
-                            value={mobileNumber}
-                            onChangeText={setMobileNumber}
-                            onFocus={() => setIsFocus3(true)}
-                            onBlur={() => setIsFocus3(false)}
-                        />
-
-                        <TouchableOpacity style={styles.button} onPress={handleSignup}>
-                            <Text style={styles.buttonText}>Sign Up</Text>
-                        </TouchableOpacity>
-                        <View style={styles.note}>
-                            <Pressable onPress={() => { navigation.navigate('login') }}>
-                                <Text>Login!</Text>
-                            </Pressable>
-                        </View>
+            <View style={styles.container}>
+                <View style={styles.design_container}>
+                    <View style={styles.image_container}>
+                        <Image source={require('../assets/images/login1.jpg')} style={styles.image} />
                     </View>
                 </View>
+
+                <View style={styles.felds_container}>
+                    <Text style={styles.header}>Sign Up</Text>
+
+                    <TextInput
+                        style={[styles.input, isFocus1 && { borderWidth: 1, borderColor: colors.ThemeText }]}
+                        placeholder="Username"
+                        value={username}
+                        onChangeText={setUsername}
+                        onFocus={() => setIsFocus1(true)}
+                        onBlur={() => setIsFocus1(false)}
+                    />
+
+                    <TextInput
+                        style={[styles.input, isFocus2 && { borderWidth: 1, borderColor: colors.ThemeText }]}
+                        placeholder="Email"
+                        keyboardType="email-address"
+                        value={email}
+                        onChangeText={setEmail}
+                        onFocus={() => setIsFocus2(true)}
+                        onBlur={() => setIsFocus2(false)}
+                    />
+
+                    <TextInput
+                        style={[styles.input, isFocus3 && { borderWidth: 1, borderColor: colors.ThemeText }]}
+                        placeholder="Mobile Number"
+                        keyboardType="numeric"
+                        maxLength={10}
+                        value={mobileNumber}
+                        onChangeText={setMobileNumber}
+                        onFocus={() => setIsFocus3(true)}
+                        onBlur={() => setIsFocus3(false)}
+                    />
+
+                    <TouchableOpacity style={styles.button} onPress={handleSignup}>
+                        <Text style={styles.buttonText}>Sign Up</Text>
+                    </TouchableOpacity>
+                    <View style={styles.note}>
+                        <Pressable onPress={() => { navigation.navigate('login') }}>
+                            <Text>Login!</Text>
+                        </Pressable>
+                    </View>
+                </View>
+            </View>
         </SafeAreaView>
     );
 };
@@ -128,7 +154,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 20,
         marginLeft: 40,
-        color:colors.ThemeText,
+        color: colors.ThemeText,
         alignSelf: "flex-start"
     },
     input: {
@@ -140,10 +166,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         backgroundColor: '#fff',
         marginBottom: 20,
-        fontSize:16,
+        fontSize: 16,
     },
     button: {
-        backgroundColor:colors.ThemeText,
+        backgroundColor: colors.ThemeText,
         paddingVertical: 13,
         paddingHorizontal: 25,
         borderRadius: 6,

@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import colors from '../helper/constant';
+import { useToast } from 'react-native-toast-notifications';
 const OTPScreen = ({ route, navigation }) => {
-  // const { mobileNumber } = route.params;
-  const mobileNumber = '12345670987'
+  const { mobileNumber } = route.params;
+  const Toast = useToast();
+  // const mobileNumber = '12345670987'
   const [otp, setOtp] = useState('');
   const [isFocus, setIsFocus] = useState(false);
 
   const handleVerifyOTP = () => {
     if (otp.length === 6) {
       // Logic to verify OTP
-      alert('OTP Verified Successfully!');
+      Toast.show("OTP Verified Successfully!", {
+        type:"success",
+        placement: "bottom",
+        duration: 1300,
+        offset: 30,
+        animationType: "slide-in",
+      });
       navigation.navigate('home');
     } else {
-      alert('Please enter a valid 6-digit OTP');
+      Toast.show("Please enter a valid 6-digit OTP", {
+        type:"warning",
+        placement: "bottom",
+        duration: 1300,
+        offset: 30,
+        animationType: "slide-in",
+      });
     }
   };
 

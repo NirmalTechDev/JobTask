@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, Image } from 'react-native';
 import colors from '../helper/constant';
-
+import { useToast } from 'react-native-toast-notifications';
 const SignIn = ({ navigation }) => {
+    const Toast = useToast();
     const [mobileNumber, setMobileNumber] = useState('');
     const [isFocus,setIsFocus] = useState(false);
     const handleSendOTP = () => {
@@ -10,7 +11,13 @@ const SignIn = ({ navigation }) => {
             // Navigate to OTP Screen
             navigation.navigate('otp', { mobileNumber });
         } else {
-            alert("Please enter a valid 10-digit mobile number");
+            Toast.show("Please enter a valid 10-digit mobile number", {
+                type:"warning",
+                placement: "bottom",
+                duration: 1300,
+                offset: 30,
+                animationType: "slide-in",
+              });
         }
     };
 
@@ -35,7 +42,10 @@ const SignIn = ({ navigation }) => {
                     onBlur={() => setIsFocus(false)}
                 />
 
-                <TouchableOpacity style={styles.button} onPress={handleSendOTP}>
+                <TouchableOpacity 
+                    style={styles.button} 
+                    onPress={handleSendOTP}
+                >
                     <Text style={styles.buttonText}>Send OTP</Text>
                 </TouchableOpacity>
                 <View style={styles.note}>

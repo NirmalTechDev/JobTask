@@ -1,8 +1,18 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 
 const FirstScreen = ({navigation}) => {
-    useEffect(()=>{
+  
+  useFocusEffect(
+    useCallback(() => {
+      setTimeout(()=>{
+        navigation.navigate('login');     
+     },1500)
+    },[])
+  )
+
+  useEffect(()=>{
         setTimeout(()=>{
            navigation.navigate('login');     
         },1500)
@@ -17,7 +27,6 @@ const style = StyleSheet.create({
     container:{
         height:"100%",
         width:"100%",
-        backgroundColor:"red"
     },
     image:{
         height:"100%",

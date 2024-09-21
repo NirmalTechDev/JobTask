@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "454441953949",
+    "project_id": "remotetest-7c51b",
+    "storage_bucket": "remotetest-7c51b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454441953949:android:d5d51fc380475933978274",
+        "android_client_info": {
+          "package_name": "com.jobtask"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4SqBVC4t06nN3phjNTngQaTPHijwPvNg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, Image, Alert, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, Image, Alert, ScrollView, ActivityIndicator } from 'react-native';
 import colors from '../helper/constant';
 import { useToast } from 'react-native-toast-notifications';
 import auth from '@react-native-firebase/auth';
@@ -9,7 +9,7 @@ const SignIn = ({ navigation }) => {
     const [mobileNumber, setMobileNumber] = useState('');
     const [confirm, setConfirm] = useState(null);
     const [otp, setOtp] = useState('');
-    let setStateOtp = Boolean;
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -32,18 +32,20 @@ const SignIn = ({ navigation }) => {
     const handleSendOTP = async () => {
         if (mobileNumber.length === 13) {
             try{
-                const confirmation = await auth().signInWithPhoneNumber('+91 96646 48614');
+                setLoading(true);
+                const confirmation = await auth().signInWithPhoneNumber("+919664648614");
                 setConfirm(confirmation);
+                setLoading(false);
             } catch(error){
                 console.log(error);
-                
-                Toast.show("no", {
+                Toast.show("number not valid", {
                     type:"warning",
                     placement: "bottom",
                     duration: 1300,
                     offset: 30,
                     animationType: "slide-in",
                 });
+                setLoading(false);
             }
         } else {
             Toast.show("Please enter a valid 10-digit mobile number", {
@@ -60,6 +62,7 @@ const SignIn = ({ navigation }) => {
         if (otp.length === 6) {
           // Logic to verify OTP
           try {
+            setLoading(true);
             await confirm.confirm(otp) ;
             Toast.show("OTP Verified Successfully!", {
               type:"success",
@@ -77,7 +80,9 @@ const SignIn = ({ navigation }) => {
               offset: 30,
               animationType: "slide-in",
             });
+            setLoading(false);
           }
+          setLoading(false);
         } else {
           Toast.show("Please enter a valid 6-digit OTP", {
             type:"warning",
@@ -114,7 +119,10 @@ const SignIn = ({ navigation }) => {
                         style={styles.button} 
                         onPress={handleSendOTP}
                     >
-                        <Text style={[styles.buttonText]}>Send OTP</Text>
+                        {
+                            loading ? <ActivityIndicator style={styles.loader} size={20} color={colors.ThemeBG}/> :
+                            <Text style={[styles.buttonText]}>Send OTP</Text>
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -141,7 +149,10 @@ const SignIn = ({ navigation }) => {
           />
     
           <TouchableOpacity style={styles.button} onPress={handleVerifyOTP}>
-            <Text style={styles.buttonText}>Verify OTP</Text>
+            {
+                loading ? <ActivityIndicator style={styles.loader} size={20} color={colors.ThemeBG}/> :
+                <Text style={styles.buttonText}>Verify OTP</Text>
+            }
           </TouchableOpacity>
           </View>
         </View>
@@ -243,6 +254,9 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 4,
+    },
+    loader:{
+        marginHorizontal:24,
     },
     buttonText: {
         fontWeight:'900',

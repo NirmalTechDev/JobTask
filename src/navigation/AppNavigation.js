@@ -5,18 +5,21 @@ import SignIn from '../sreens/signIn';
 import Home from '../sreens/home';
 import FirstScreen from '../sreens/firstScreen';
 import { ToastProvider } from 'react-native-toast-notifications';
+import ProfileScreen from '../sreens/profileScreen';
+import TabNavigation from './TabNavigation';
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
   return (
-    <ToastProvider>
-      <NavigationContainer>
+    // <ToastProvider>
+    //   <NavigationContainer>
         <Stack.Navigator initialRouteName='first'>
           <Stack.Screen name='first' component={FirstScreen} options={{ headerShown: false }} />
           <Stack.Screen name='login' component={SignIn} options={{ headerShown: false }} />
-          <Stack.Screen name='home' component={Home} options={{ headerShown: false }} />
+          <Stack.Screen name='home' component={TabNavigation} options={{ headerShown: false }} />
+          <Stack.Screen name='Profile' component={ProfileScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
-      </NavigationContainer>
-    </ToastProvider>
+    //   </NavigationContainer>
+    // </ToastProvider>
   )
 }
 

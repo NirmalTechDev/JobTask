@@ -10,7 +10,6 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   return (
-    <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
@@ -34,12 +33,11 @@ const TabNavigation = () => {
           style: { paddingBottom: 5, height: 60,},
         }}
       >
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Friends" component={FriendsScreen} />
-        <Tab.Screen name="Notifications" component={NotificationsScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
+        <Tab.Screen name="Home" component={Home} options={{headerShown:false}} />
+        <Tab.Screen name="Friends" component={FriendsScreen} options={{headerShown:false}} />
+        <Tab.Screen name="Notifications" component={NotificationsScreen} options={{headerShown:false}} />
+        <Tab.Screen name="Profile" component={ProfileScreen} options={{headerShown:false}} />
       </Tab.Navigator>
-    </NavigationContainer>
   )
 }
 

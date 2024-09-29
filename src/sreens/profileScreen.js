@@ -1,37 +1,15 @@
-// import { View, Text, StyleSheet, Pressable } from 'react-native'
-// import React from 'react'
-// const ProfileScreen = ({navigation}) => {
-
-
-
-//     return (
-//         <View style={styles.container}>
-//             <Text>Profile Screen</Text>
-//             
-//         </View>
-//     )
-// }
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         backgroundColor: '#fff',
-//     },
-//     
-// })
-// export default ProfileScreen
-
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import auth from '@react-native-firebase/auth';
 
-export default function ProfileScreen({navigation}) {
+export default function ProfileScreen({ navigation }) {
 
     const logout = () => {
         auth()
             .signOut()
-            .then(() => { navigation.navigate('login') }).catch((error) => { console.log(error) })
-    }
+            .then(() => { navigation.navigate('login'); }).catch((error) => { console.log(error); });
+    };
 
     return (
         <ScrollView style={styles.container}>
@@ -173,8 +151,8 @@ const styles = StyleSheet.create({
     logouttxt: {
         fontSize: 30,
         padding: 10,
-        color: "black",
-        backgroundColor:"red",
-        textAlign:"center",
-    }
+        color: 'black',
+        backgroundColor: 'red',
+        textAlign: 'center',
+    },
 });

@@ -33,7 +33,7 @@ const SignIn = ({ navigation }) => {
         if (mobileNumber.length === 13) {
             try {
                 setLoading(true);
-                const confirmation = await auth().signInWithPhoneNumber("+919664648614");
+                const confirmation = await auth().signInWithPhoneNumber(mobileNumber);
                 setConfirm(confirmation);
                 setLoading(false);
             } catch (error) {

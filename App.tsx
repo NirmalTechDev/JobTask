@@ -1,9 +1,8 @@
-import { View, Text, Platform, PermissionsAndroid, Alert, Linking } from 'react-native'
-import React, { useEffect } from 'react'
-import AppNavigation from './src/navigation/AppNavigation'
-import { ToastProvider } from 'react-native-toast-notifications'
-import { NavigationContainer } from '@react-navigation/native'
-import { PERMISSIONS, request } from 'react-native-permissions'
+import { Platform, PermissionsAndroid, Alert, Linking } from 'react-native';
+import React, { useEffect } from 'react';
+import AppNavigation from './src/navigation/AppNavigation';
+import { ToastProvider } from 'react-native-toast-notifications';
+import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
 
@@ -11,7 +10,7 @@ const App = () => {
     if (Platform.OS === 'android') {
       checkAndRequestLocationPermission();
     }
-  }, []);
+  });
 
   // Check if the location permission is granted or denied
   const checkAndRequestLocationPermission = async () => {
@@ -20,7 +19,7 @@ const App = () => {
 
       if (granted) {
         console.log('Location permission already granted');
-        getCurrentLocation();
+        // getCurrentLocation();
       } else {
         requestLocationPermission();
       }
@@ -51,7 +50,7 @@ const App = () => {
           'You have permanently denied location permission. To enable it, go to Settings.',
           [
             { text: 'Cancel', style: 'cancel' },
-            { text: 'Open Settings', onPress: () => Linking.openSettings() }
+            { text: 'Open Settings', onPress: () => Linking.openSettings() },
           ]
         );
       } else {
@@ -68,18 +67,7 @@ const App = () => {
         <AppNavigation />
       </NavigationContainer>
     </ToastProvider>
-  )
+  );
+};
 
-  // if (!true) {
-  //   return (
-  //     <AppNavigation />
-  //   )
-  // } else {
-  //   return (
-  //       <TabNavigation />
-  //   )
-  // }
-
-}
-
-export default App
+export default App;

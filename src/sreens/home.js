@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, BackHandler, Alert, TouchableWithoutFeedback, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, BackHandler, Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Geolocation from 'react-native-geolocation-service';
-import MapView, { Callout, Marker } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import colors from '../helper/constant';
-const profilepic = ["https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/454837168_322641514177562_4543743564091306202_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=Ad5qq0gIM-UQ7kNvgGhkXJv&_nc_gid=a06b6a619a224fdf8a0380844cd49984&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYDgtu4PnRMGRfpW9iRcghlKzi7CezJGqgemeRBW0aFk8A&oe=66F48567&_nc_sid=7d3ac5",
-  "https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/460827328_1771721280299642_8632251657500811285_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=ob8cAlM7DmQQ7kNvgE1my1o&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYBxlA2pdCeW5E1I-N7NExjpl-PgRn-zlxB2Eho3YKhlKw&oe=66F60C12&_nc_sid=7d3ac5",
-]
+const profilepic = ['https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/454837168_322641514177562_4543743564091306202_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=5eEEb6FyC70Q7kNvgEbo9_g&_nc_gid=a3aae3010f2149948654f80dc59e7bdc&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYDGU6u01A8_ZZJd32MVx5sCuMz28y6JCg3xGemkI7tQJw&oe=66FF1167&_nc_sid=7d3ac5',
+  'https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/460879976_2264819820520905_5224897982768735743_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=7NrIWu6lvDYQ7kNvgHKpBoq&_nc_gid=a7f6b7ccd33843aba33b77bc2c1b22ae&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYDmbRY0zYA_jjwmP0Q-2lHmbdR0J6R5I1c__u1Lg4dGxA&oe=66FF0DD3&_nc_sid=7d3ac5',
+];
 // Example JSX
 function Home() {
   const [location, setLocation] = useState(null);
@@ -47,18 +47,18 @@ function Home() {
       );
     };
     // getCurrentLocation();
-  }, [])
+  }, []);
 
   const markers = [
     {
       coordinate: { latitude: 23.0225, longitude: 72.5714 },
       title: 'Location 1',
-      description: 'This is the first location'
+      description: 'This is the first location',
     },
     {
       coordinate: { latitude: 23.2156, longitude: 72.6369 },
       title: 'Location 2',
-      description: 'This is the second location'
+      description: 'This is the second location',
     },
     // {
     //   coordinate: { latitude: 37.76825, longitude: -122.4824 },
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: colors.ThemeText,
-    textAlignVertical: "center",
+    textAlignVertical: 'center',
   },
   profilePic: {
     width: 50,
@@ -184,4 +184,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-export default Home
+export default Home;

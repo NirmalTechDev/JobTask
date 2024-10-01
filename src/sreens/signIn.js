@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, Image, Alert, ScrollView, ActivityIndicator, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, ActivityIndicator, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native';
 import colors from '../helper/constant';
 import { useToast } from 'react-native-toast-notifications';
 import auth from '@react-native-firebase/auth';
 const SignIn = ({ navigation }) => {
     const Toast = useToast();
-    const [countryCode, setCountryCode] = useState('+91')
+    const [countryCode, setCountryCode] = useState('+91');
     const [mobileNumber, setMobileNumber] = useState('');
+    const [name,setName] = useState('');
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
     const [confirm, setConfirm] = useState(null);
     const [otp, setOtp] = useState('');
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
         return subscriber; // unsubscribe on unmount
-    }, []);
+    });
 
     function onAuthStateChanged(user) {
         if (user) {
@@ -38,22 +41,22 @@ const SignIn = ({ navigation }) => {
                 setLoading(false);
             } catch (error) {
                 console.log(error);
-                Toast.show("number not valid", {
-                    type: "warning",
-                    placement: "bottom",
+                Toast.show('number not valid', {
+                    type: 'warning',
+                    placement: 'bottom',
                     duration: 1300,
                     offset: 30,
-                    animationType: "slide-in",
+                    animationType: 'slide-in',
                 });
                 setLoading(false);
             }
         } else {
-            Toast.show("Please enter a valid 10-digit mobile number", {
-                type: "warning",
-                placement: "bottom",
+            Toast.show('Please enter a valid 10-digit mobile number', {
+                type: 'warning',
+                placement: 'bottom',
                 duration: 1300,
                 offset: 30,
-                animationType: "slide-in",
+                animationType: 'slide-in',
             });
         }
     };
@@ -64,32 +67,32 @@ const SignIn = ({ navigation }) => {
             try {
                 setLoading(true);
                 await confirm.confirm(otp);
-                Toast.show("OTP Verified Successfully!", {
-                    type: "success",
-                    placement: "bottom",
+                Toast.show('OTP Verified Successfully!', {
+                    type: 'success',
+                    placement: 'bottom',
                     duration: 1300,
                     offset: 30,
-                    animationType: "slide-in",
+                    animationType: 'slide-in',
                 });
             } catch (error) {
                 console.log('Invalid code.');
-                Toast.show("Invalid code", {
-                    type: "danger",
-                    placement: "bottom",
+                Toast.show('Invalid code', {
+                    type: 'danger',
+                    placement: 'bottom',
                     duration: 1300,
                     offset: 30,
-                    animationType: "slide-in",
+                    animationType: 'slide-in',
                 });
                 setLoading(false);
             }
             setLoading(false);
         } else {
-            Toast.show("Please enter a valid 6-digit OTP", {
-                type: "warning",
-                placement: "bottom",
+            Toast.show('Please enter a valid 6-digit OTP', {
+                type: 'warning',
+                placement: 'bottom',
                 duration: 1300,
                 offset: 30,
-                animationType: "slide-in",
+                animationType: 'slide-in',
             });
         }
     };
@@ -109,50 +112,47 @@ const SignIn = ({ navigation }) => {
                                 style={[
                                     styles.input,
                                     mobileNumber.length && {
-                                        borderColor: colors.ThemeBorder
-                                    }
+                                        borderColor: colors.ThemeBorder,
+                                    },
                                 ]}
                                 placeholder="Name"
                                 placeholderTextColor={colors.ThemeButton}
-                                maxLength={13}
-                                value={mobileNumber}
-                                onChangeText={setMobileNumber}
+                                value={name}
+                                onChangeText={setName}
                             />
 
                             <TextInput
                                 style={[
                                     styles.input,
                                     mobileNumber.length && {
-                                        borderColor: colors.ThemeBorder
-                                    }
+                                        borderColor: colors.ThemeBorder,
+                                    },
                                 ]}
                                 placeholder="Email"
                                 placeholderTextColor={colors.ThemeButton}
-                                keyboardType="numeric"
-                                maxLength={13}
-                                value={mobileNumber}
-                                onChangeText={setMobileNumber}
+                                keyboardType="email-address"
+                                value={email}
+                                onChangeText={setEmail}
                             />
                             <TextInput
                                 style={[
                                     styles.input,
                                     mobileNumber.length && {
-                                        borderColor: colors.ThemeBorder
-                                    }
+                                        borderColor: colors.ThemeBorder,
+                                    },
                                 ]}
                                 placeholder="Password"
                                 placeholderTextColor={colors.ThemeButton}
-                                keyboardType="numeric"
-                                maxLength={13}
-                                value={mobileNumber}
-                                onChangeText={setMobileNumber}
+                                keyboardType="email-address"
+                                value={password}
+                                onChangeText={setPassword}
                             />
                             <TextInput
                                 style={[
                                     styles.input,
                                     mobileNumber.length && {
-                                        borderColor: colors.ThemeBorder
-                                    }
+                                        borderColor: colors.ThemeBorder,
+                                    },
                                 ]}
                                 placeholder="Mobile Number"
                                 placeholderTextColor={colors.ThemeButton}
@@ -229,8 +229,8 @@ const SignIn = ({ navigation }) => {
     //                 onBlur={() => setIsFocus(false)}
     //             />
 
-    //             <TouchableOpacity 
-    //                 style={styles.button} 
+    //             <TouchableOpacity
+    //                 style={styles.button}
     //                 onPress={handleSendOTP}
     //             >
     //                 <Text style={styles.buttonText}>Send OTP</Text>
@@ -256,21 +256,21 @@ const styles = StyleSheet.create({
     },
     felds_container: {
         flex: 1,
-        justifyContent: "center",
+        justifyContent: 'center',
         paddingTop: 20,
         alignItems: 'center',
     },
     header: {
         fontSize: 35,
-        alignSelf: "flex-start",
+        alignSelf: 'flex-start',
         marginLeft: 45,
         fontWeight: 'bold',
         marginVertical: 20,
-        color: colors.ThemeBorder
+        color: colors.ThemeBorder,
     },
     subHeader_parent: {
-        flexDirection: "row",
-        alignSelf: "flex-start",
+        flexDirection: 'row',
+        alignSelf: 'flex-start',
         marginLeft: 45,
     },
     subHeader: {
@@ -296,7 +296,6 @@ const styles = StyleSheet.create({
         borderColor: colors.ThemeButton,
         borderBottomWidth: 1,
         paddingHorizontal: 10,
-        backgroundColor: '#fff',
         marginVertical: 20,
         fontSize: 16,
         backgroundColor: colors.ThemeBG,

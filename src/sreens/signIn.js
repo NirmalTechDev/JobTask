@@ -3,13 +3,16 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Activi
 import colors from '../helper/constant';
 import { useToast } from 'react-native-toast-notifications';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import validator from 'validator';
+
 const SignIn = ({ navigation }) => {
     const Toast = useToast();
     const [countryCode, setCountryCode] = useState('+91');
     const [mobileNumber, setMobileNumber] = useState('');
-    const [name,setName] = useState('');
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [confirm, setConfirm] = useState(null);
     const [otp, setOtp] = useState('');
     const [loading, setLoading] = useState(false);
@@ -32,32 +35,134 @@ const SignIn = ({ navigation }) => {
         }
     }
 
+    // const setData = async () => {
+    //     try {
+    //       // Using set() to create or update a document in Firestore
+    //       await firestore()
+    //         .collection('users') // Collection name
+    //         .add({
+    //           name: name,
+    //           email: email,
+    //           password: password,
+    //           number: mobileNumber,
+    //         });
+
+    //       console.log('User data set successfully!');
+    //     } catch (error) {
+    //       console.error('Error setting document: ', error);
+    //     }
+    //   };
+
+
+
+    // const handleSendOTP = async () => {
+    //     if (mobileNumber.length === 13) {
+    //         try {
+    //             setLoading(true);
+    //             const confirmation = await auth().signInWithPhoneNumber(mobileNumber);
+    //             setConfirm(confirmation);
+    //             setData();
+    //             setLoading(false);
+    //         } catch (error) {
+    //             console.log(error);
+    //             Toast.show('number not valid', {
+    //                 type: 'warning',
+    //                 placement: 'bottom',
+    //                 duration: 1300,
+    //                 offset: 30,
+    //                 animationType: 'slide-in',
+    //             });
+    //             setLoading(false);
+    //         }
+    //     } else {
+    //         Toast.show('Please enter a valid 10-digit mobile number', {
+    //             type: 'warning',
+    //             placement: 'bottom',
+    //             duration: 1300,
+    //             offset: 30,
+    //             animationType: 'slide-in',
+    //         });
+    //     }
+    // };
+
     const handleSendOTP = async () => {
-        if (mobileNumber.length === 13) {
+        // Trim whitespace from inputs
+        const trimmedName = name.trim();
+        const trimmedEmail = email.trim();
+        const trimmedMobileNumber = mobileNumber.trim();
+        const trimmedPassword = password.trim();
+
+        // Validation
+        if (trimmedName.length === 0) {
+            Toast.show('Please enter your name.',{
+                type: 'warning',
+                position: 'bottom',
+                visibilityTime: 1300,
+                autoHide: true,
+            });
+            return;
+        }
+
+        if (!validator.isEmail(trimmedEmail)) {
+            Toast.show('Please enter a valid email address.',{
+                type: 'warning',
+                position: 'bottom',
+                visibilityTime: 1300,
+                autoHide: true,
+            });
+            return;
+        }
+
+        if (trimmedPassword.length < 6) { // Minimum 6 characters for password
+            Toast.show('Password must be at least 6 characters long.',{
+                type: 'warning',
+                position: 'bottom',
+                visibilityTime: 1300,
+                autoHide: true,
+            });
+            return;
+        }
+
+        if (trimmedMobileNumber.length !== 13 || !validator.isNumeric(trimmedMobileNumber)) {
+            Toast.show('Please enter a valid 10-digit mobile number.',{
+                type: 'warning',
+                position: 'bottom',
+                visibilityTime: 1300,
+                autoHide: true,
+            });
+            return;
+        }
+
+        // Sending OTP
+        if (trimmedMobileNumber.length === 13) {
             try {
                 setLoading(true);
-                const confirmation = await auth().signInWithPhoneNumber(mobileNumber);
+                const confirmation = await auth().signInWithPhoneNumber(trimmedMobileNumber);
                 setConfirm(confirmation);
+                setData(); // Assuming this is to reset form fields
                 setLoading(false);
+
+                // Store user data in Firestore after OTP has been sent
+                await firestore()
+                    .collection('users')
+                    .add({
+                        name: trimmedName,
+                        email: trimmedEmail,
+                        password: trimmedPassword, // Ideally, hash this password
+                        number: trimmedMobileNumber,
+                    });
+
+                console.log('User data set successfully!');
             } catch (error) {
-                console.log(error);
-                Toast.show('number not valid', {
+                console.error(error);
+                Toast.show('There was an issue with your mobile number.',{
                     type: 'warning',
-                    placement: 'bottom',
-                    duration: 1300,
-                    offset: 30,
-                    animationType: 'slide-in',
+                    position: 'bottom',
+                    visibilityTime: 1300,
+                    autoHide: true,
                 });
                 setLoading(false);
             }
-        } else {
-            Toast.show('Please enter a valid 10-digit mobile number', {
-                type: 'warning',
-                placement: 'bottom',
-                duration: 1300,
-                offset: 30,
-                animationType: 'slide-in',
-            });
         }
     };
 

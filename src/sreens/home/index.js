@@ -3,11 +3,11 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, BackHandler, Alert } f
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Geolocation from 'react-native-geolocation-service';
 import MapView, { Marker } from 'react-native-maps';
-import colors from '../helper/constant';
-const profilepic = ['https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/454837168_322641514177562_4543743564091306202_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=5eEEb6FyC70Q7kNvgEbo9_g&_nc_gid=a3aae3010f2149948654f80dc59e7bdc&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYDGU6u01A8_ZZJd32MVx5sCuMz28y6JCg3xGemkI7tQJw&oe=66FF1167&_nc_sid=7d3ac5',
-  'https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/460879976_2264819820520905_5224897982768735743_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=7NrIWu6lvDYQ7kNvgHKpBoq&_nc_gid=a7f6b7ccd33843aba33b77bc2c1b22ae&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYDmbRY0zYA_jjwmP0Q-2lHmbdR0J6R5I1c__u1Lg4dGxA&oe=66FF0DD3&_nc_sid=7d3ac5',
-];
+
+const profilepic = ['https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/454837168_322641514177562_4543743564091306202_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=XTixJITJBicQ7kNvgFA6NQE&_nc_gid=5722a423e5214232a472f93f1e74a167&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYBxqofYCR_L4rfij6g1TqRKEug56A3JVD0tPSyWfmNwNw&oe=670DCA27&_nc_sid=7d3ac5',
+'https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/460879976_2264819820520905_5224897982768735743_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=htSqrrlELusQ7kNvgG-l40Z&_nc_gid=9c9561dc94e74e6aaf9770c0fcaf7d13&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYCBJUg1t6dOFaHx8hs_do8fFp4l27DiY7mqfNIMAmXVFw&oe=670DC693&_nc_sid=7d3ac5'];
 import firestore from '@react-native-firebase/firestore';
+import { styles } from './styles';
 
 // Example JSX
 function Home() {
@@ -124,66 +124,5 @@ function Home() {
     </View>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 20,
-    backgroundColor: colors.ThemeBG,
-  },
-  greeting: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: colors.ThemeText,
-    textAlignVertical: 'center',
-  },
-  profilePic: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-  actions: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 20,
-    backgroundColor: colors.ThemeButton,
-  },
-  actionButton: {
-    backgroundColor: colors.ThemeBorder,
-    // padding: 15,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 50,
-    height: 50,
-  },
-  actionText: {
-    color: '#fff',
-    marginTop: 5,
-  },
-  map: {
-    flex: 1,
-    margin: 10,
-  },
-  customMarker: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  markerImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 50,
-    borderWidth: 2,
-    borderColor: 'white',
-  },
-  markerText: {
-    color: 'red',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-});
+
 export default Home;

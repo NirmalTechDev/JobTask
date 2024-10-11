@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, ActivityIndicator, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native';
-import colors from '../helper/constant';
+import colors from '../utils/colors';
 import { useToast } from 'react-native-toast-notifications';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';

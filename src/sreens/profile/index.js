@@ -87,19 +87,18 @@
 
 
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, FlatList, Dimensions, Pressable } from 'react-native';
+import { View, Image, TouchableOpacity, ScrollView, FlatList, Dimensions, Pressable } from 'react-native';
 import VectorIcon from '../../components/Vectoricon';
 import { Ntext } from '../../components/Ntext';
 import { styles } from './styles';
 import colors from '../../utils/colors';
-import BottomModel from './component/bottomModel';
-import BottomSheet from './component/bottomModel';
-// import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
 const deviceWidth = Dimensions.get('window').width;
 
 
 const ProfileScreen = () => {
-
+    const navigation = useNavigation();
     const posts = [1, 2, 3, 4];
     const reels = [1, 2, 3, 4];
 
@@ -109,7 +108,6 @@ const ProfileScreen = () => {
         { name: 'people-outline', type: 'Ionicons' }
     ];
     const [selectedTab, setSelectedTab] = useState(0);
-    const [modelVisible, setModelVisible] = useState(false);
 
 
     const onTabPress = (index) => {
@@ -160,7 +158,7 @@ const ProfileScreen = () => {
                 <Ntext title='the_nirmal_ranpariya' color='black' size={16} type='bold' />
                 <VectorIcon name={'verified'} type={'MaterialIcons'} size={18} color={colors.ThemeBorder} style={{ marginLeft: 3, alignSelf: "center" }} />
                 {/* <VectorIcon name={'chevron-down-outline'} type={'Ionicons'} size={14} style={{ alignSelf: 'center' }} /> */}
-                <Pressable style={styles.headerIcons} onPress={() => { setModelVisible(true) }} >
+                <Pressable style={styles.headerIcons} onPress={()=>{navigation.navigate('setting')}}>
                     <VectorIcon name={'menu-outline'} type={'Ionicons'} size={25} style={{ alignSelf: 'center' }} />
                 </Pressable>
             </View>
@@ -291,7 +289,6 @@ const ProfileScreen = () => {
                         }}
                     />
                 </View>
-                <BottomSheet visible={modelVisible} height={500} onClose={() => { setModelVisible(false) }} ></BottomSheet>
             </ScrollView>
         </View>
     );

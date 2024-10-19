@@ -137,7 +137,7 @@ const SignIn = ({ navigation }) => {
         if (trimmedMobileNumber.length === 13) {
             try {
                 setLoading(true);
-                const confirmation = await auth().signInWithPhoneNumber(trimmedMobileNumber);
+                const confirmation = await auth().signInWithPhoneNumber('+919664648614'); // use this var  trimmedMobileNumber
                 setConfirm(confirmation);
                 setData(); // Assuming this is to reset form fields
                 setLoading(false);

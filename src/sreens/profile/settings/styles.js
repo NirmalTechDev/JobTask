@@ -13,12 +13,16 @@ export const styles = StyleSheet.create({
         elevation: 5,
         backgroundColor: 'white'
     },
+    settingBack: {
+        flexDirection: 'row',
+    },
+
     sectionHeader: {
         fontSize: 18,
         fontWeight: 'bold',
         color: '#000',
         marginTop: 15,
-        paddingHorizontal:16,
+        paddingHorizontal: 16,
     },
     item: {
         flexDirection: 'row',

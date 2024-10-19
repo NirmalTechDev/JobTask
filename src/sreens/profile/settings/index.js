@@ -99,7 +99,7 @@ const SettingScreen = () => {
     };
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.item} onPress={() => { item.action === 'logout' ? logout() : null }}>
+        <TouchableOpacity style={[styles.item,item.action && {backgroundColor:'rgba(225,225,225,0.5)'}]} onPress={() => { item.action === 'logout' ? logout() : null }}>
             <VectorIcon name={item.icon} type={'MaterialIcons'} size={24} color={'#000'} />
             <Text style={styles.itemText}>{item.name}</Text>
             <VectorIcon name={'chevron-right'} type={'MaterialIcons'} size={24} color={'#999'} />
@@ -117,10 +117,12 @@ const SettingScreen = () => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.header} onPress={() => { GoBack() }} >
-                <VectorIcon type={'MaterialIcons'} name={'chevron-left'} color='#000' size={25} />
-                <Ntext title='Settings' color={colors.black} size={18} type='bold' />
-            </TouchableOpacity>
+            <View style={styles.header} onPress={() => { GoBack() }} >
+                <TouchableOpacity style={styles.settingBack} onPress={() => { GoBack() }} >
+                    <VectorIcon type={'MaterialIcons'} name={'chevron-left'} color='#000' size={25} />
+                    <Ntext title='Settings' color={colors.black} size={18} type='bold' />
+                </TouchableOpacity>
+            </View>
             <SectionList
                 sections={sections}
                 keyExtractor={(item, index) => item.name + index}

@@ -9,6 +9,7 @@ const App = () => {
   useEffect(() => {
     if (Platform.OS === 'android') {
       checkAndRequestLocationPermission();
+      requestCameraPermission();
     }
   });
 
@@ -60,6 +61,28 @@ const App = () => {
       console.warn(err);
     }
   };
+
+  const requestCameraPermission = async (): Promise<void> => {
+    if (Platform.OS === 'android') {
+      try {
+        const granted: string = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          {
+            title: 'Camera Permission',
+            message: 'App needs camera permission',
+          }
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('Camera permission granted');
+        } else {
+          console.log('Camera permission denied');
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    }
+  };
+
 
   return (
     <ToastProvider>

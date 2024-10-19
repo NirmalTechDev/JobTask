@@ -6,7 +6,6 @@ import NotificationsScreen from '../sreens/notification';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import VibesScreen from '../sreens/vibes';
 import VectorIcon from '../components/Vectoricon';
-import SettingScreen from '../sreens/profile/settings';
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {

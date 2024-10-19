@@ -132,7 +132,7 @@ const ProfileScreen = () => {
             <View style={styles.gridContainer}>
                 {reels.map((_, index) => (
                     <View key={index} style={[style, { justifyContent: 'flex-end' }]} >
-                        <Ntext title='13M' color={colors.black} size={13} type='bold' />
+                        <Ntext title='13M' color={colors.black} size={13} type='bold' style={{paddingHorizontal:5,paddingVertical:5}} />
                     </View>
                 ))}
             </View>
@@ -204,7 +204,7 @@ const ProfileScreen = () => {
                     {
                         true ?
                             <>
-                                <TouchableOpacity style={[styles.followButton, { backgroundColor: colors.gray }]}>
+                                <TouchableOpacity style={[styles.followButton, { backgroundColor: colors.gray }]} onPress={()=>{navigation.navigate('editProfile')}}>
                                     <Ntext title='Edit Profile' color={colors.Placeholdercolor} type='bold' size={15} />
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.messageButton}>

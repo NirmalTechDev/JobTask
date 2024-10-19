@@ -6,6 +6,7 @@ import ProfileScreen from '../sreens/profile';
 import TabNavigation from './TabNavigation';
 import LoginScreen from '../sreens/hello';
 import SettingScreen from '../sreens/profile/settings';
+import ProfileEditScreen from '../sreens/profile/component/ProfileEditScreen';
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
   return (
@@ -18,6 +19,7 @@ const AppNavigation = () => {
       <Stack.Screen name="home" component={TabNavigation} options={{ headerShown: false }} />
       <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
       <Stack.Screen name="setting" component={SettingScreen} options={{ headerShown: false }} />
+      <Stack.Screen name='editProfile' component={ProfileEditScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
     //   </NavigationContainer>
     // </ToastProvider>

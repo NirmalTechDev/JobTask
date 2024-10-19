@@ -107,7 +107,7 @@ export const styles = StyleSheet.create({
     headerIcons: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
     },
     profileInfoContainer: {
         paddingVertical: 5,
@@ -217,27 +217,27 @@ export const styles = StyleSheet.create({
     gridContainer: {
         width: deviceWidth,
         marginTop: 5,
-        paddingHorizontal: 10,
+        paddingLeft: 5,
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
     gridItem: {
-        width: '32.5%',
-        height: 115,
+        width: '32.4%',
+        height: 110,
         backgroundColor:colors.ThemeText2,
         marginBottom: 3,
         marginRight: 3,
     },
     gridItem1: {
-        width: '32.5%',
-        height: 200,
+        width: '32.4%',
+        height: 180,
         backgroundColor: colors.ThemeText2,
         marginBottom: 3,
         marginRight: 3,
     },
     gridItem2: {
-        width: '32.5%',
-        height: 115,
+        width: '32.4%',
+        height: 110,
         backgroundColor: colors.ThemeText2,
         marginBottom: 3,
         marginRight: 3,

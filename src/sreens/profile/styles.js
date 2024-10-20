@@ -118,7 +118,7 @@ export const styles = StyleSheet.create({
         resizeMode:'cover'
     },
     profileInfoContainer: {
-        height:40,
+        height:45,
         paddingVertical: 5,
         paddingHorizontal: 16,
         flexDirection: 'row',

@@ -1,55 +1,156 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, BackHandler, Alert } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Geolocation from 'react-native-geolocation-service';
-import MapView, { Marker } from 'react-native-maps';
+// import React, { useEffect, useState } from 'react';
+// import { View, Text, TouchableOpacity, Image, BackHandler, Alert } from 'react-native';
+// import Ionicons from 'react-native-vector-icons/Ionicons';
+// import Geolocation from 'react-native-geolocation-service';
+// import MapView, { Marker } from 'react-native-maps';
+
+// const profilepic = ['https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/454837168_322641514177562_4543743564091306202_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=XTixJITJBicQ7kNvgFA6NQE&_nc_gid=5722a423e5214232a472f93f1e74a167&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYBxqofYCR_L4rfij6g1TqRKEug56A3JVD0tPSyWfmNwNw&oe=670DCA27&_nc_sid=7d3ac5',
+// 'https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/460879976_2264819820520905_5224897982768735743_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=htSqrrlELusQ7kNvgG-l40Z&_nc_gid=9c9561dc94e74e6aaf9770c0fcaf7d13&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYCBJUg1t6dOFaHx8hs_do8fFp4l27DiY7mqfNIMAmXVFw&oe=670DC693&_nc_sid=7d3ac5'];
+// import { styles } from './styles';
+
+// // Example JSX
+// function Home() {
+//   const [location, setLocation] = useState(null);
+
+//   useEffect(() => {
+//     const backAction = () => {
+//       Alert.alert('Exit App', 'Are you sure you want to exit?', [
+//         {
+//           text: 'Cancel',
+//           onPress: () => null,
+//           style: 'cancel',
+//         },
+//         { text: 'Yes', onPress: () => BackHandler.exitApp() },
+//       ]);
+//       return true;
+//     };
+
+//     const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+//     return () => backHandler.remove();
+//   }, []);
+
+//   useEffect(() => {
+//     const getCurrentLocation = () => {
+//       Geolocation.getCurrentPosition(
+//         (position) => {
+//           const { latitude, longitude } = position.coords;
+//           setLocation({
+//             latitude,
+//             longitude,
+//           });
+//         },
+//         (error) => {
+//           console.log(error);
+//           Alert.alert('Error', 'Unable to fetch location.');
+//         },
+//         { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+//       );
+//     };
+//     // getCurrentLocation();
+//   }, []);
+
+//   const markers = [
+//     {
+//       coordinate: { latitude: 21.1702, longitude: 72.8311 },
+//       title: 'Location 1',
+//       description: 'This is the first location',
+//     },
+//     {
+//       coordinate: { latitude: 19.0760, longitude: 72.8777 },
+//       title: 'Location 2',
+//       description: 'This is the second location',
+//     },
+//     // {
+//     //   coordinate: { latitude: 37.76825, longitude: -122.4824 },
+//     //   title: 'Location 3',
+//     //   description: 'This is the third location'
+//     // },
+//     // Add more markers here...
+//   ];
+
+//   return (
+//     <View style={styles.container}>
+//       <View style={styles.header}>
+//         <Text style={styles.greeting}>Hello, Nirmal!</Text>
+//         <Image
+//           source={{ uri: profilepic[1] }}
+//           style={styles.profilePic}
+//         />
+//       </View>
+
+//       <View style={styles.actions}>
+//         <TouchableOpacity style={styles.actionButton}>
+//           <Ionicons name="location-outline" size={30} color="#fff" />
+//           {/* <Text style={styles.actionText}>Share Location</Text> */}
+//         </TouchableOpacity>
+//         <TouchableOpacity style={styles.actionButton}>
+//           <Ionicons name="person-add-outline" size={30} color="#fff" />
+//           {/* <Text style={styles.actionText}>Find Friends</Text> */}
+//         </TouchableOpacity>
+//         <TouchableOpacity style={styles.actionButton}>
+//           <Ionicons name="notifications-outline" size={30} color="#fff" />
+//           {/* <Text style={styles.actionText}>Notifications</Text> */}
+//         </TouchableOpacity>
+//       </View>
+
+//       <MapView
+//         style={styles.map}
+//         initialRegion={{
+//           latitude: 21.1702,
+//           longitude: 72.8311,
+//           latitudeDelta: 0.0922,
+//           longitudeDelta: 0.0421,
+//         }}
+//       >
+//         {markers.map((marker, index) => (
+//           <Marker
+//             key={index}
+//             coordinate={marker.coordinate}
+//             title={marker.title}
+//             description={marker.description}
+//           >
+//             <View style={styles.customMarker}>
+//               <Image
+//                 source={{ uri: profilepic[index]}}
+//                 style={styles.markerImage}
+//               />
+//               <Text style={styles.markerText}>📍</Text>
+//             </View>
+//           </Marker>
+//         ))}
+//       </MapView>
+//     </View>
+//   );
+// }
+
+// export default Home;
+
+
+import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+  FlatList,
+} from 'react-native';
+import VectorIcon from '../../components/Vectoricon'; // Custom icon component
+import MapView, { Marker } from 'react-native-maps'; // Map component for friend locations
+import { styles } from './styles';
+import colors from '../../utils/colors';
+import { useNavigation } from '@react-navigation/native';
 
 const profilepic = ['https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/454837168_322641514177562_4543743564091306202_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=XTixJITJBicQ7kNvgFA6NQE&_nc_gid=5722a423e5214232a472f93f1e74a167&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYBxqofYCR_L4rfij6g1TqRKEug56A3JVD0tPSyWfmNwNw&oe=670DCA27&_nc_sid=7d3ac5',
-'https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/460879976_2264819820520905_5224897982768735743_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=htSqrrlELusQ7kNvgG-l40Z&_nc_gid=9c9561dc94e74e6aaf9770c0fcaf7d13&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYCBJUg1t6dOFaHx8hs_do8fFp4l27DiY7mqfNIMAmXVFw&oe=670DC693&_nc_sid=7d3ac5'];
-import firestore from '@react-native-firebase/firestore';
-import { styles } from './styles';
+  'https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/460879976_2264819820520905_5224897982768735743_n.jpg?_nc_ht=instagram.fstv5-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=htSqrrlELusQ7kNvgG-l40Z&_nc_gid=9c9561dc94e74e6aaf9770c0fcaf7d13&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYCBJUg1t6dOFaHx8hs_do8fFp4l27DiY7mqfNIMAmXVFw&oe=670DC693&_nc_sid=7d3ac5'];
 
-// Example JSX
-function Home() {
-  const [location, setLocation] = useState(null);
 
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert('Exit App', 'Are you sure you want to exit?', [
-        {
-          text: 'Cancel',
-          onPress: () => null,
-          style: 'cancel',
-        },
-        { text: 'Yes', onPress: () => BackHandler.exitApp() },
-      ]);
-      return true;
-    };
+const Home = () => {
+  const navigation = useNavigation();
+  const [mapVisible, setMapVisible] = React.useState(false);
 
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-
-    return () => backHandler.remove();
-  }, []);
-
-  useEffect(() => {
-    const getCurrentLocation = () => {
-      Geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setLocation({
-            latitude,
-            longitude,
-          });
-        },
-        (error) => {
-          console.log(error);
-          Alert.alert('Error', 'Unable to fetch location.');
-        },
-        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-      );
-    };
-    // getCurrentLocation();
-  }, []);
 
   const markers = [
     {
@@ -70,59 +171,110 @@ function Home() {
     // Add more markers here...
   ];
 
+
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.greeting}>Hello, Nirmal!</Text>
-        <Image
-          source={{ uri: profilepic[1] }}
-          style={styles.profilePic}
+      {/* Top Navigation Bar */}
+      <View style={styles.navbar}>
+        <Text style={styles.logo}>AppLogo</Text>
+        <Text style={styles.searchBar}>Search...</Text>
+        <TouchableOpacity onPress={()=> {navigation.navigate('notifiications')}}>
+          <VectorIcon name="notifications" type={'Ionicons'} size={25} color="#333" />
+        </TouchableOpacity>
+      </View>
+
+      {/* Stories Section */}
+      <View style={styles.storisContainer}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={[...Array(5)]}
+          renderItem={(element) => {
+            return (
+                (element.index === 0) ?
+                  <TouchableOpacity style={styles.myStory}>
+                    <Image source={require('../../assets/images/my.jpg')} style={styles.storyImage} />
+                    <VectorIcon type={'MaterialIcons'} name={"add-circle"} color={"orange"} style={styles.addIcon} size={20} />
+                  </TouchableOpacity>
+                  :
+                  <TouchableOpacity style={styles.story}>
+                    <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.storyImage} />
+                  </TouchableOpacity>
+            )
+          }}
         />
       </View>
 
-      <View style={styles.actions}>
-        <TouchableOpacity style={styles.actionButton}>
-          <Ionicons name="location-outline" size={30} color="#fff" />
-          {/* <Text style={styles.actionText}>Share Location</Text> */}
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton}>
-          <Ionicons name="person-add-outline" size={30} color="#fff" />
-          {/* <Text style={styles.actionText}>Find Friends</Text> */}
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton}>
-          <Ionicons name="notifications-outline" size={30} color="#fff" />
-          {/* <Text style={styles.actionText}>Notifications</Text> */}
-        </TouchableOpacity>
+      {/* Content Feed */}
+      <View style={styles.feedContainer}>
+        <FlatList
+          data={[...Array(10)]}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.feed}
+          renderItem={() => {
+            return (
+              <View style={styles.postCard}>
+                <View style={styles.postHeader}>
+                  <Image source={{ uri: 'https://via.placeholder.com/40' }} style={styles.postUserPic} />
+                  <Text style={styles.postUsername}>User1</Text>
+                </View>
+                <Image source={{ uri: 'https://via.placeholder.com/300' }} style={styles.postImage} />
+                <View style={styles.postEngagementBar}>
+                  <TouchableOpacity><VectorIcon name="heart" type={'EvilIcons'} size={25} color="#e74c3c" /></TouchableOpacity>
+                  <TouchableOpacity><VectorIcon name="comment" type={'EvilIcons'} size={25} color="#333" /></TouchableOpacity>
+                  <TouchableOpacity><VectorIcon name="share" type={'Feather'} size={20} color="#333" /></TouchableOpacity>
+                </View>
+                <Text style={styles.postCaption}>Great view! #nature</Text>
+              </View>
+            )
+          }}
+        />
       </View>
 
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 21.1702,
-          longitude: 72.8311,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      >
-        {markers.map((marker, index) => (
-          <Marker
-            key={index}
-            coordinate={marker.coordinate}
-            title={marker.title}
-            description={marker.description}
-          >
-            <View style={styles.customMarker}>
-              <Image
-                source={{ uri: profilepic[index]}}
-                style={styles.markerImage}
-              />
-              <Text style={styles.markerText}>📍</Text>
-            </View>
-          </Marker>
-        ))}
-      </MapView>
+      {/* Map Icon (Floating) */}
+      <TouchableOpacity style={styles.mapIcon} onPress={() => setMapVisible(true)}>
+        <VectorIcon name="map-marker" type={'FontAwesome'} size={25} color="#fff" />
+      </TouchableOpacity>
+
+      {/* Modal for Map */}
+      <Modal visible={mapVisible} transparent={true}>
+        <View style={styles.mapModal}>
+          <View style={styles.mapContainer}>
+            <MapView
+              style={styles.map}
+              initialRegion={{
+                latitude: 21.1702,
+                longitude: 72.8311,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            >
+              {markers.map((marker, index) => (
+                <Marker
+                  key={index}
+                  coordinate={marker.coordinate}
+                  title={marker.title}
+                  description={marker.description}
+                >
+                  <View style={styles.customMarker}>
+                    <Image
+                      source={{ uri: profilepic[index] }}
+                      style={styles.markerImage}
+                    />
+                    <Text style={styles.markerText}>📍</Text>
+                  </View>
+                </Marker>
+              ))}
+            </MapView>
+          </View>
+          <TouchableOpacity onPress={() => setMapVisible(false)} style={styles.closeMapBtn}>
+            <VectorIcon name={'close'} type={'AntDesign'} color={colors.white} size={30} />
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   );
-}
+};
 
 export default Home;

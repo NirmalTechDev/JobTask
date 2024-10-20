@@ -98,7 +98,7 @@ import LinearGradient from 'react-native-linear-gradient';
 const deviceWidth = Dimensions.get('window').width;
 
 
-const ProfileScreen = () => {
+const FriendsProfileScreen = () => {
     const navigation = useNavigation();
     const posts = [1, 2, 3, 4];
     const reels = [1, 2, 3, 4];
@@ -156,17 +156,20 @@ const ProfileScreen = () => {
 
             {/* Header */}
             <View style={styles.header}>
-                <Ntext title='the_nirmal_ranpariya' color='black' size={16} type='bold' />
+                <Pressable style={styles.headerIcons} onPress={() => { navigation.navigate('setting') }}>
+                    <VectorIcon name={'chevron-back'} type={'Ionicons'} size={18} />
+                </Pressable>
+                <Ntext title='friends_user_names' color='black' size={16} type='bold' style={styles.username} />
                 <VectorIcon name={'verified'} type={'MaterialIcons'} size={18} color={colors.ThemeBorder} style={{ marginLeft: 3, alignSelf: "center" }} />
                 {/* <VectorIcon name={'chevron-down-outline'} type={'Ionicons'} size={14} style={{ alignSelf: 'center' }} /> */}
-                <Pressable style={styles.headerIcons} onPress={() => { navigation.navigate('setting') }}>
+                {/* <Pressable style={styles.headerIcons} onPress={() => { navigation.navigate('setting') }}>
                     <VectorIcon name={'menu-outline'} type={'Ionicons'} size={25} style={{ alignSelf: 'center' }} />
-                </Pressable>
+                </Pressable> */}
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false}>
                 {/* Cover Image */}
-                <TouchableOpacity style={styles.coverImageContainer} onLongPress={()=>{Alert.alert('Jay Dwarikadhish')}}>
+                <TouchableOpacity style={styles.coverImageContainer} onLongPress={() => { Alert.alert('Jay Dwarikadhish') }}>
                     <Image source={require('../../assets/images/dwarika.jpg')} style={styles.coverImage} />
                 </TouchableOpacity>
                 {/* Profile Image */}
@@ -299,4 +302,4 @@ const ProfileScreen = () => {
     );
 };
 
-export default ProfileScreen;
+export default FriendsProfileScreen;

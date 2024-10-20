@@ -6,12 +6,13 @@ import NotificationsScreen from '../sreens/notification';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import VibesScreen from '../sreens/vibes';
 import VectorIcon from '../components/Vectoricon';
+import FriendsProfileScreen from '../sreens/friendsProfile';
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   return (
     <Tab.Navigator
-      initialRouteName={'Profile'}
+      initialRouteName={'friendsProfile'}
       screenOptions={({ route }) => ({
         // eslint-disable-next-line react/no-unstable-nested-components
         tabBarIcon: ({ color, size }) => {
@@ -48,6 +49,7 @@ const TabNavigation = () => {
       <Tab.Screen name="Friends" component={FriendsScreen} options={{ headerShown: false }} />
       <Tab.Screen name="Notifications" component={NotificationsScreen} options={{ headerShown: false }} />
       <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+      <Tab.Screen name='friendsProfile' component={FriendsProfileScreen} options={{headerShown: false}} />
     </Tab.Navigator>
   );
 };

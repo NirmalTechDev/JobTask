@@ -104,10 +104,11 @@ export const styles = StyleSheet.create({
         elevation: 5,
         backgroundColor: colors.white,
     },
+    username:{
+        marginLeft:10,
+    },
     headerIcons: {
-        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end',
     },
     coverImageContainer:{
         height:'13%',

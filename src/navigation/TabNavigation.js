@@ -12,14 +12,14 @@ const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
   return (
     <Tab.Navigator
-      initialRouteName={'friendsProfile'}
+      initialRouteName={'home'}
       screenOptions={({ route }) => ({
         // eslint-disable-next-line react/no-unstable-nested-components
         tabBarIcon: ({ color, size }) => {
           let iconName;
           let iconType;
 
-          if (route.name === 'Home') {
+          if (route.name === 'home') {
             iconName = 'home-outline';
             iconType = 'Ionicons';
           } else if (route.name === 'vibes') {
@@ -44,12 +44,11 @@ const TabNavigation = () => {
         style: { paddingBottom: 5, height: 60 },
       }}
     >
-      <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Tab.Screen name="home" component={Home} options={{ headerShown: false }} />
       <Tab.Screen name="vibes" component={VibesScreen} options={{ headerShown: false }} />
       <Tab.Screen name="Friends" component={FriendsScreen} options={{ headerShown: false }} />
       <Tab.Screen name="Notifications" component={NotificationsScreen} options={{ headerShown: false }} />
       <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
-      <Tab.Screen name='friendsProfile' component={FriendsProfileScreen} options={{headerShown: false}} />
     </Tab.Navigator>
   );
 };

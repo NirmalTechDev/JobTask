@@ -100,12 +100,11 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 12,
         flexDirection: 'row',
+        alignItems:'center',
         shadowColor: colors.shadowColor,
         elevation: 5,
         backgroundColor: colors.white,
-    },
-    username:{
-        marginLeft:10,
+        justifyContent:"space-between",
     },
     headerIcons: {
         flexDirection: 'row',
@@ -119,7 +118,7 @@ export const styles = StyleSheet.create({
         resizeMode:'cover'
     },
     profileInfoContainer: {
-        height:40,
+        height:45,
         paddingVertical: 5,
         paddingHorizontal: 16,
         flexDirection: 'row',

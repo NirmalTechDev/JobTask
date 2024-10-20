@@ -102,6 +102,7 @@ const FriendsProfileScreen = () => {
     const navigation = useNavigation();
     const posts = [1, 2, 3, 4];
     const reels = [1, 2, 3, 4];
+    const [follow,setFollow] = useState(false);
 
     let tabIcon = [
         { name: 'grid-on', type: 'MaterialIcons' },
@@ -156,15 +157,16 @@ const FriendsProfileScreen = () => {
 
             {/* Header */}
             <View style={styles.header}>
-                <Pressable style={styles.headerIcons} onPress={() => { navigation.navigate('setting') }}>
+                <Pressable style={styles.headerIcons} onPress={() => { navigation.goBack() }}>
                     <VectorIcon name={'chevron-back'} type={'Ionicons'} size={18} />
                 </Pressable>
-                <Ntext title='friends_user_names' color='black' size={16} type='bold' style={styles.username} />
-                <VectorIcon name={'verified'} type={'MaterialIcons'} size={18} color={colors.ThemeBorder} style={{ marginLeft: 3, alignSelf: "center" }} />
-                {/* <VectorIcon name={'chevron-down-outline'} type={'Ionicons'} size={14} style={{ alignSelf: 'center' }} /> */}
-                {/* <Pressable style={styles.headerIcons} onPress={() => { navigation.navigate('setting') }}>
-                    <VectorIcon name={'menu-outline'} type={'Ionicons'} size={25} style={{ alignSelf: 'center' }} />
-                </Pressable> */}
+                <View style={{ flexDirection: 'row' }}>
+                    <Ntext title='friends_user_names' color='black' size={16} type='bold' />
+                    <VectorIcon name={'verified'} type={'MaterialIcons'} size={18} color={colors.ThemeBorder} style={{ marginLeft: 3, alignSelf: "center" }} />
+                </View>
+                <Pressable style={styles.headerIcons} onPress={() => { navigation.navigate('setting') }}>
+                    <VectorIcon name={'dots-three-horizontal'} type={'Entypo'} size={20} style={{ alignSelf: 'center' }} />
+                </Pressable>
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -179,7 +181,7 @@ const FriendsProfileScreen = () => {
                             source={require('../../assets/images/my.jpg')} // Add profile picture URI
                             style={styles.profilePicture}
                         />
-                        <VectorIcon type={'MaterialIcons'} name={"add-circle"} color={"orange"} style={styles.addIcon} size={20} />
+                        {/* <VectorIcon type={'MaterialIcons'} name={"add-circle"} color={"orange"} style={styles.addIcon} size={20} /> */}
                     </View>
                     {/* blank container */}
                     <View style={{ width: '25%', backgroundColor: "red" }}></View>
@@ -201,7 +203,7 @@ const FriendsProfileScreen = () => {
                 </View>
 
                 <View style={styles.profileDetails}>
-                    <Ntext title='Nirmal Ranpariya' size={15} type='bold' color={colors.black} />
+                    <Ntext title='name ...' size={15} type='bold' color={colors.black} />
                     <Ntext title='Description' size={14} color={colors.Placeholdercolor} />
                     <Ntext title='Bio' size={14} color={colors.black} />
                     <Ntext title='www.buynr.life' size={14} color={'#007bff'} style={styles.websiteLink} />
@@ -209,96 +211,91 @@ const FriendsProfileScreen = () => {
 
                 {/* Action Buttons */}
                 <View style={styles.actionButtonsContainer}>
-                    {
-                        true ?
-                            <>
-                                <TouchableOpacity style={[styles.followButton, { backgroundColor: colors.gray }]} onPress={() => { navigation.navigate('editProfile') }}>
-                                    <Ntext title='Edit Profile' color={colors.Placeholdercolor} type='bold' size={15} />
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.messageButton}>
-                                    <Ntext title='Share Profile' color={colors.Placeholdercolor} type='bold' size={15} />
-                                </TouchableOpacity>
-                            </>
-                            :
-                            <>
-                                <TouchableOpacity style={styles.followButton}>
-                                    <Ntext title='Following' color={colors.white} type='bold' size={15} />
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.messageButton}>
-                                    <Ntext title='Message' color={colors.ThemeBorder} type='bold' size={15} />
-                                </TouchableOpacity>
-                            </>
+                <>
+                    {follow ?
+                        <TouchableOpacity style={[styles.followButton, { backgroundColor: colors.gray }]} onPress={() => {setFollow(false) }}>
+                            <Ntext title='Unfollow' color={colors.Placeholdercolor} type='bold' size={15} />
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={styles.followButton} onPress={()=>{setFollow(true)}}>
+                            <Ntext title='Following' color={colors.white} type='bold' size={15} />
+                        </TouchableOpacity>
                     }
-                    {/* <TouchableOpacity style={styles.dropdownButton}>
+
+                    <TouchableOpacity style={styles.messageButton}>
+                        <Ntext title='Message' color={colors.ThemeBorder} type='bold' size={15} />
+                    </TouchableOpacity>
+                </>
+                {/* <TouchableOpacity style={styles.dropdownButton}>
                         <VectorIcon name={'chevron-down-outline'} type={'Ionicons'} size={20} color={colors.black} />
                     </TouchableOpacity> */}
-                </View>
-
-                {/* Stories */}
-                <View style={styles.storiesContainer}>
-                    <FlatList
-                        showsHorizontalScrollIndicator={false}
-                        data={[...Array(6)]}
-                        horizontal={true}
-                        keyExtractor={(item, index) => index.toString()}
-                        renderItem={(item, index) => {
-                            if (item.index === 0) {
-                                return (
-                                    <TouchableOpacity style={styles.storyItem}>
-                                        <View style={styles.addHighlight}>
-                                            <VectorIcon name={'add-outline'} type={'Ionicons'} size={30} color={colors.Placeholdercolor} />
-                                        </View>
-                                        <Ntext title='New' size={12} color={colors.Placeholdercolor} />
-                                    </TouchableOpacity>
-                                )
-                            } else {
-                                return (
-                                    <>
-                                        <TouchableOpacity key={item.index} style={styles.storyItem}>
-                                            <View style={styles.storyPlaceholder} />
-                                            <Ntext title={'Highlight ' + item.index} size={12} color={colors.Placeholdercolor} />
-                                        </TouchableOpacity>
-                                    </>
-                                )
-                            }
-                        }}
-                    />
-                </View>
-
-                {/* Tabs */}
-                <View style={{ flex: 1 }}>
-                    <View style={styles.tabContainer}>
-                        {tabIcon.map((val, ind) => (
-                            <TouchableOpacity
-                                key={ind}
-                                style={[
-                                    styles.tabIconButton,
-                                    selectedTab === ind && { borderColor: colors.black }
-                                ]}
-                                onPress={() => onTabPress(ind)}
-                            >
-                                <VectorIcon name={val.name} type={val.type} size={25} color='black' />
-                            </TouchableOpacity>
-                        ))}
-                    </View>
-
-                    {/* Content */}
-                    <FlatList
-                        ref={(ref) => { flatListRef = ref; }}
-                        horizontal
-                        pagingEnabled
-                        showsHorizontalScrollIndicator={false}
-                        data={[...Array(3)]}
-                        renderItem={renderItem}
-                        keyExtractor={(item, index) => index.toString()}
-                        onMomentumScrollEnd={(event) => {
-                            const index = Math.round(event.nativeEvent.contentOffset.x / deviceWidth);
-                            setSelectedTab(index);
-                        }}
-                    />
-                </View>
-            </ScrollView>
         </View>
+
+                {/* Stories */ }
+    <View style={styles.storiesContainer}>
+        <FlatList
+            showsHorizontalScrollIndicator={false}
+            data={[...Array(6)]}
+            horizontal={true}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={(item, index) => {
+                if (false && item.index === 0) {
+                    return (
+                        <TouchableOpacity style={styles.storyItem}>
+                            <View style={styles.addHighlight}>
+                                <VectorIcon name={'add-outline'} type={'Ionicons'} size={30} color={colors.Placeholdercolor} />
+                            </View>
+                            <Ntext title='New' size={12} color={colors.Placeholdercolor} />
+                        </TouchableOpacity>
+                    )
+                } else {
+                    return (
+                        <>
+                            <TouchableOpacity key={item.index} style={styles.storyItem}>
+                                <View style={styles.storyPlaceholder} />
+                                <Ntext title={'Highlight ' + item.index} size={12} color={colors.Placeholdercolor} />
+                            </TouchableOpacity>
+                        </>
+                    )
+                }
+            }}
+        />
+    </View>
+
+    {/* Tabs */ }
+    <View style={{ flex: 1 }}>
+        <View style={styles.tabContainer}>
+            {tabIcon.map((val, ind) => (
+                <TouchableOpacity
+                    key={ind}
+                    style={[
+                        styles.tabIconButton,
+                        selectedTab === ind && { borderColor: colors.black }
+                    ]}
+                    onPress={() => onTabPress(ind)}
+                >
+                    <VectorIcon name={val.name} type={val.type} size={25} color='black' />
+                </TouchableOpacity>
+            ))}
+        </View>
+
+        {/* Content */}
+        <FlatList
+            ref={(ref) => { flatListRef = ref; }}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            data={[...Array(3)]}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            onMomentumScrollEnd={(event) => {
+                const index = Math.round(event.nativeEvent.contentOffset.x / deviceWidth);
+                setSelectedTab(index);
+            }}
+        />
+    </View>
+            </ScrollView >
+        </View >
     );
 };
 

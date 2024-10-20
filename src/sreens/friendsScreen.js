@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TextInput, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -12,6 +13,7 @@ const friends = [
 
 export default function FriendsScreen() {
   const [searchQuery, setSearchQuery] = useState('');
+  const navigation = useNavigation();
 
   // Filter friends based on search query
   const filteredFriends = friends.filter(friend =>
@@ -19,7 +21,7 @@ export default function FriendsScreen() {
   );
 
   const renderItem = ({ item }) => (
-    <View style={styles.friendCard}>
+    <TouchableOpacity style={styles.friendCard} onPress={()=>{navigation.navigate('friendsProfile') }}>
       <Image source={{ uri: item.profilePic }} style={styles.profilePic} />
       <View style={styles.textContainer}>
         <Text style={styles.friendName}>{item.name}</Text>
@@ -28,7 +30,7 @@ export default function FriendsScreen() {
       <TouchableOpacity style={styles.actionButton}>
         <Text style={styles.actionButtonText}>Message</Text>
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 
   return (

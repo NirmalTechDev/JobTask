@@ -6,6 +6,7 @@ export const Ntext = ({
     color = "#ff1493",           // Default color is black
     size = 20,                 // Default font size is 20
     type = "regular",          // Default font weight is 'regular'
+    numberOfLine,
     style = {}                 // Default style is an empty object
 }) => {
 
@@ -28,7 +29,7 @@ export const Ntext = ({
         <Text
             style={[
                 styles.txt,
-                { color: color, fontSize: size, fontWeight: getFontWeight(type) },
+                { color: color, fontSize: size, fontWeight: getFontWeight(type), numberOfLine: numberOfLine },
                 style
             ]}
         >
@@ -42,6 +43,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '900',
         color: 'black',
-        textAlignVertical:'center'
+        textAlignVertical: 'center'
     }
 });

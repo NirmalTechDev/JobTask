@@ -60,10 +60,6 @@ export const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: '#f8f8f8',
   },
-  logo: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
   searchBar: {
     flex: 1,
     marginHorizontal: 10,
@@ -126,9 +122,6 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     marginRight: 10,
   },
-  postUsername: {
-    fontWeight: 'bold',
-  },
   postImage: {
     width: '100%',
     height: 200,
@@ -141,7 +134,6 @@ export const styles = StyleSheet.create({
   },
   postCaption: {
     marginTop: 10,
-    color: '#333',
   },
   mapIcon: {
     position: 'absolute',
@@ -172,10 +164,16 @@ export const styles = StyleSheet.create({
     height: '95%',
     alignSelf: 'center',
   },
-  closeMapBtn: {
+  mapactionBotton:{
+    paddingHorizontal:16,
+    flexDirection:"row",
+    justifyContent:'flex-end',
+  },
+    closeMapBtn: {
     alignSelf: 'center',
-    marginTop: 20,
-   padding:13,
+    marginTop: 10,
+    marginHorizontal:5,
+    padding:5,
     backgroundColor: colors.ThemeBorder,
     borderRadius: 50,
   },
@@ -189,10 +187,5 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 2,
     borderColor: 'white',
-  },
-  markerText: {
-    color: 'red',
-    fontWeight: 'bold',
-    fontSize: 18,
   },
 });

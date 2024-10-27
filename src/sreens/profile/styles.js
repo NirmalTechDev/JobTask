@@ -110,7 +110,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     coverImageContainer:{
-        height:'13%',
+        height:100,
     },
     coverImage:{
         height:"100%",

@@ -133,7 +133,7 @@ const ProfileScreen = () => {
             <View style={styles.gridContainer}>
                 {reels.map((_, index) => (
                     <View key={index} style={[style, { justifyContent: 'flex-end' }]} >
-                        <Ntext title='13M' color={colors.black} size={13} type='bold' style={{ paddingHorizontal: 5, paddingVertical: 5 }} />
+                        <Ntext title={index+1+'M'} color={colors.black} size={13} type='bold' style={{ paddingHorizontal: 5, paddingVertical: 5 }} />
                     </View>
                 ))}
             </View>
@@ -294,6 +294,7 @@ const ProfileScreen = () => {
                         }}
                     />
                 </View>
+                {/* <View style={{height:103.8,backgroundColor:'red'}}></View> */}
             </ScrollView>
         </View>
     );

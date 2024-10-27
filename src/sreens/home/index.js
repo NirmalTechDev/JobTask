@@ -188,6 +188,7 @@ const Home = () => {
         </TouchableOpacity>
       </View>
 
+      <ScrollView>
       {/* Stories Section */}
       <View style={styles.storisContainer}>
         <FlatList
@@ -235,10 +236,10 @@ const Home = () => {
           }}
         />
       </View>
-
+      </ScrollView>
       {/* Map Icon (Floating) */}
       <TouchableOpacity style={styles.mapIcon} onPress={() => setMapVisible(true)}>
-        <VectorIcon name="map-marker" type={'FontAwesome'} size={25} color="#fff" />
+        <VectorIcon name="map-marker" type={'FontAwesome'} size={25} color={colors.ThemeBorder} />
       </TouchableOpacity>
 
       {/* Modal for Map */}

@@ -141,7 +141,7 @@ export const styles = StyleSheet.create({
     right: 20,
     width: 45,
     height: 45,
-    backgroundColor: colors.ThemeBorder,
+    backgroundColor: colors.white,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,

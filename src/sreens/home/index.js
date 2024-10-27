@@ -154,7 +154,7 @@ const Home = () => {
   const [mapVisible, setMapVisible] = React.useState(false);
 
 
-  const [markers,setmarkers] = useState([
+  const [markers, setmarkers] = useState([
     {
       coordinate: { latitude: 21.1702, longitude: 72.8311 },
       title: 'Location 1',
@@ -173,69 +173,69 @@ const Home = () => {
     // Add more markers here...
   ]);
 
-    const RefreshMap = () => {
-      //heare i want to set the code for refress map and refind my currunt location
-    }
+  const RefreshMap = () => {
+    //heare i want to set the code for refress map and refind my currunt location
+  }
 
   return (
     <View style={styles.container}>
       {/* Top Navigation Bar */}
       <View style={styles.navbar}>
-        <Ntext title='AppLogo' size={20} type='bold' color='#000'/>
+        <Ntext title='AppLogo' size={20} type='bold' color='#000' />
         <Ntext title='Search...' size={14} color={colors.Placeholdercolor} style={styles.searchBar} />
-        <TouchableOpacity onPress={()=> {navigation.navigate('notifiications')}}>
+        <TouchableOpacity onPress={() => { navigation.navigate('notifiications') }}>
           <VectorIcon name="notifications" type={'Ionicons'} size={25} color="#333" />
         </TouchableOpacity>
       </View>
 
       <ScrollView>
-      {/* Stories Section */}
-      <View style={styles.storisContainer}>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={[...Array(5)]}
-          renderItem={(element) => {
-            return (
+        {/* Stories Section */}
+        <View style={styles.storisContainer}>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={[...Array(5)]}
+            renderItem={(element) => {
+              return (
                 (element.index === 0) ?
                   <TouchableOpacity style={styles.myStory}>
-                    <Image source={require('../../assets/images/my.jpg')} style={styles.storyImage} />
+                    <Image source={require('../../assets/images/cat.png')} style={styles.storyImage} />
                     <VectorIcon type={'MaterialIcons'} name={"add-circle"} color={"orange"} style={styles.addIcon} size={20} />
                   </TouchableOpacity>
                   :
                   <TouchableOpacity style={styles.story}>
                     <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.storyImage} />
                   </TouchableOpacity>
-            )
-          }}
-        />
-      </View>
+              )
+            }}
+          />
+        </View>
 
-      {/* Content Feed */}
-      <View style={styles.feedContainer}>
-        <FlatList
-          data={[...Array(10)]}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.feed}
-          renderItem={() => {
-            return (
-              <View style={styles.postCard}>
-                <View style={styles.postHeader}>
-                  <Image source={{ uri: 'https://via.placeholder.com/40' }} style={styles.postUserPic} />
-                  <Ntext title='User1' size={14} type='bold' color={colors.Placeholdercolor}/>
+        {/* Content Feed */}
+        <View style={styles.feedContainer}>
+          <FlatList
+            data={[...Array(10)]}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.feed}
+            renderItem={() => {
+              return (
+                <View style={styles.postCard}>
+                  <View style={styles.postHeader}>
+                    <Image source={{ uri: 'https://via.placeholder.com/40' }} style={styles.postUserPic} />
+                    <Ntext title='User1' size={14} type='bold' color={colors.Placeholdercolor} />
+                  </View>
+                  <Image source={{ uri: 'https://via.placeholder.com/300' }} style={styles.postImage} />
+                  <View style={styles.postEngagementBar}>
+                    <TouchableOpacity><VectorIcon name="heart" type={'EvilIcons'} size={25} color="#e74c3c" /></TouchableOpacity>
+                    <TouchableOpacity><VectorIcon name="comment" type={'EvilIcons'} size={25} color="#333" /></TouchableOpacity>
+                    <TouchableOpacity><VectorIcon name="share" type={'Feather'} size={20} color="#333" /></TouchableOpacity>
+                  </View>
+                  <Ntext title='Great view! #nature' size={14} style={styles.postCaption} color='#333' />
                 </View>
-                <Image source={{ uri: 'https://via.placeholder.com/300' }} style={styles.postImage} />
-                <View style={styles.postEngagementBar}>
-                  <TouchableOpacity><VectorIcon name="heart" type={'EvilIcons'} size={25} color="#e74c3c" /></TouchableOpacity>
-                  <TouchableOpacity><VectorIcon name="comment" type={'EvilIcons'} size={25} color="#333" /></TouchableOpacity>
-                  <TouchableOpacity><VectorIcon name="share" type={'Feather'} size={20} color="#333" /></TouchableOpacity>
-                </View>
-                <Ntext title='Great view! #nature' size={14} style={styles.postCaption} color='#333'/>
-              </View>
-            )
-          }}
-        />
-      </View>
+              )
+            }}
+          />
+        </View>
       </ScrollView>
       {/* Map Icon (Floating) */}
       <TouchableOpacity style={styles.mapIcon} onPress={() => setMapVisible(true)}>
@@ -274,12 +274,12 @@ const Home = () => {
             </MapView>
           </View>
           <View style={styles.mapactionBotton}>
-          <TouchableOpacity onPress={() => RefreshMap()} style={styles.closeMapBtn}>
-            <VectorIcon name={'find-replace'} type={'MaterialIcons'} color={colors.white} size={20} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setMapVisible(false)} style={styles.closeMapBtn}>
-            <VectorIcon name={'close'} type={'AntDesign'} color={colors.white} size={20} />
-          </TouchableOpacity>
+            <TouchableOpacity onPress={() => RefreshMap()} style={styles.closeMapBtn}>
+              <VectorIcon name={'find-replace'} type={'MaterialIcons'} color={colors.white} size={20} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setMapVisible(false)} style={styles.closeMapBtn}>
+              <VectorIcon name={'close'} type={'AntDesign'} color={colors.white} size={20} />
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>

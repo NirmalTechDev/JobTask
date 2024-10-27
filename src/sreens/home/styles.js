@@ -167,7 +167,7 @@ export const styles = StyleSheet.create({
   mapactionBotton:{
     paddingHorizontal:16,
     flexDirection:"row",
-    justifyContent:'flex-end',
+    justifyContent:'flex-start',
   },
     closeMapBtn: {
     alignSelf: 'center',

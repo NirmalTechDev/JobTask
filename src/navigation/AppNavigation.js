@@ -11,6 +11,8 @@ import FriendsProfileScreen from '../sreens/friendsProfile';
 import FindFriendsScreen from '../sreens/findFriends';
 import VibesScreen from '../sreens/vibes';
 import NotificationScreen from '../sreens/notification';
+import ChatScreen from '../sreens/chat';
+import ChatingScreen from '../sreens/chat/chating';
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
   return (
@@ -27,6 +29,9 @@ const AppNavigation = () => {
       <Stack.Screen name='findFriend' component={FindFriendsScreen} options={{ headerShown: false, animation: 'ios' }} />
 
       <Stack.Screen name='vibes' component={VibesScreen} options={{ headerShown: false, animation: 'ios' }} />
+
+      <Stack.Screen name='chat' component={ChatScreen} options={{ headerShown: false, animation: 'ios' }} />
+      <Stack.Screen name='chatingScreen' component={ChatingScreen} options={{ headerShown: false, animation: 'ios' }} />
 
       <Stack.Screen name='notifiications' component={NotificationScreen} options={{ headerShown: false, animation: 'ios' }} />
 

@@ -11,9 +11,11 @@ import VectorIcon from '../../components/Vectoricon'; // Custom icon component
 import { styles } from './styles';
 import colors from '../../utils/colors';
 import { Ntext } from '../../components/Ntext';
+import { useNavigation } from '@react-navigation/native';
 
 const ChatScreen = () => {
   // Dummy chat data for the chat inbox screen
+  const navigation = useNavigation();
   const chats = [
     {
       id: 1,
@@ -145,7 +147,7 @@ const ChatScreen = () => {
       {/* Chat List */}
       <ScrollView style={styles.chatList}>
         {chats.map(chat => (
-          <TouchableOpacity key={chat.id} style={styles.chatItem}>
+          <TouchableOpacity key={chat.id} style={styles.chatItem} onPress={() => {navigation.navigate('chatingScreen')}}>
             <Image source={{ uri: chat.profilePic }} style={styles.profilePic} />
             <View style={styles.chatDetails}>
               <Ntext title={chat.name} size={16} type='bold' color={colors.black} />

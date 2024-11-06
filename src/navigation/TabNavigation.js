@@ -197,8 +197,7 @@ const styles = StyleSheet.create({
   },
   tabItem: {
     alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
+    paddingHorizontal:10,
   },
   tabLabel: {
     fontSize: 10,

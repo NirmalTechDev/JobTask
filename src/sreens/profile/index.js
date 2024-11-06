@@ -156,7 +156,7 @@ const ProfileScreen = () => {
 
             {/* Header */}
             <View style={styles.header}>
-                <Ntext title='the_nirmal_ranpariya' color='black' size={16} type='bold' />
+                <Ntext title='catchat_official' color='black' size={16} type='bold' />
                 <VectorIcon name={'verified'} type={'MaterialIcons'} size={18} color={colors.ThemeBorder} style={{ marginLeft: 3, alignSelf: "center" }} />
                 {/* <VectorIcon name={'chevron-down-outline'} type={'Ionicons'} size={14} style={{ alignSelf: 'center' }} /> */}
                 <Pressable style={styles.headerIcons} onPress={() => { navigation.navigate('setting') }}>
@@ -173,7 +173,7 @@ const ProfileScreen = () => {
                 <View style={styles.profileInfoContainer}>
                     <View style={styles.profilePictureContainer}>
                         <Image
-                            source={require('../../assets/images/my.jpg')} // Add profile picture URI
+                            source={require('../../assets/images/cat.png')} // Add profile picture URI
                             style={styles.profilePicture}
                         />
                         <VectorIcon type={'MaterialIcons'} name={"add-circle"} color={"orange"} style={styles.addIcon} size={20} />
@@ -198,7 +198,7 @@ const ProfileScreen = () => {
                 </View>
 
                 <View style={styles.profileDetails}>
-                    <Ntext title='Nirmal Ranpariya' size={15} type='bold' color={colors.black} />
+                    <Ntext title='CatChat' size={15} type='bold' color={colors.black} />
                     <Ntext title='Description' size={14} color={colors.Placeholdercolor} />
                     <Ntext title='Bio' size={14} color={colors.black} />
                     <Ntext title='www.buynr.life' size={14} color={'#007bff'} style={styles.websiteLink} />

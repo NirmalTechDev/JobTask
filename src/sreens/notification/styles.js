@@ -7,11 +7,8 @@ export const styles = StyleSheet.create({
       paddingTop: 20,
     },
     header: {
-      fontSize: 24,
-      fontWeight: 'bold',
       paddingHorizontal: 20,
       marginBottom: 20,
-      color: '#333',
     },
     notificationCard: {
       flexDirection: 'row',
@@ -32,19 +29,8 @@ export const styles = StyleSheet.create({
     textContainer: {
       flex: 1,
     },
-    title: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: '#333',
-    },
     description: {
-      fontSize: 14,
-      color: '#666',
       marginTop: 2,
-    },
-    time: {
-      fontSize: 12,
-      color: '#999',
     },
   });
   

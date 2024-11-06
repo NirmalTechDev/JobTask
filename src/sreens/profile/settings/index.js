@@ -101,7 +101,7 @@ const SettingScreen = () => {
     const renderItem = ({ item }) => (
         <TouchableOpacity style={[styles.item,item.action && {backgroundColor:'rgba(225,225,225,0.5)'}]} onPress={() => { item.action === 'logout' ? logout() : null }}>
             <VectorIcon name={item.icon} type={'MaterialIcons'} size={24} color={'#000'} />
-            <Text style={styles.itemText}>{item.name}</Text>
+            <Ntext title={item.name} size={16} color={colors.black} style={styles.itemText}/>
             <VectorIcon name={'chevron-right'} type={'MaterialIcons'} size={24} color={'#999'} />
         </TouchableOpacity>
     );
@@ -109,7 +109,7 @@ const SettingScreen = () => {
     const renderSectionHeader = ({ section: { title } }) => (
         <>
             {/* <View style={styles.horizontalLine} /> */}
-            <Text style={styles.sectionHeader}>{title}</Text>
+            <Ntext title={title} size={18} type='bold' color={colors.black} style={styles.sectionHeader}  />
         </>
 
 

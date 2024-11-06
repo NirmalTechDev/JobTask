@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from './styles';
+import { Ntext } from '../../components/Ntext';
+import colors from '../../utils/colors';
 
 // Sample notification data
 const notifications = [
@@ -34,16 +36,16 @@ export default function NotificationScreen() {
     <TouchableOpacity style={styles.notificationCard}>
       <Icon name={item.icon} size={30} color="#3498db" style={styles.icon} />
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.description}>{item.description}</Text>
+        <Ntext title={item.title} size={16} type='bold' color={colors.black}/>
+        <Ntext title={item.description} size={14} color={colors.Placeholdercolor} style={styles.description} />
       </View>
-      <Text style={styles.time}>{item.time}</Text>
+      <Ntext title={item.time} size={12} color='#999' />
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Notifications</Text>
+      <Ntext title='Notification' size={24} type='bold' color={colors.black} style={styles.header} />
       <FlatList
         data={notifications}
         renderItem={renderItem}

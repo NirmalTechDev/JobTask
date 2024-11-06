@@ -18,9 +18,6 @@ export const styles = StyleSheet.create({
     },
 
     sectionHeader: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#000',
         marginTop: 15,
         paddingHorizontal: 16,
     },
@@ -32,8 +29,6 @@ export const styles = StyleSheet.create({
     },
     itemText: {
         flex: 1,
-        fontSize: 16,
-        color: '#000',
         marginLeft: 15,
     },
     chevron: {

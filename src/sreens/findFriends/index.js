@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { View, Text, FlatList, TextInput, Image, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
 import VectorIcon from '../../components/Vectoricon';
+import { Ntext } from '../../components/Ntext';
+import colors from '../../utils/colors';
 
 // Sample friend data
 const friends = [
@@ -25,11 +27,11 @@ const FindFriendsScreen = () => {
     <TouchableOpacity style={styles.friendCard} onPress={()=>{navigation.navigate('friendsProfile') }}>
       <Image source={{ uri: item.profilePic }} style={styles.profilePic} />
       <View style={styles.textContainer}>
-        <Text style={styles.friendName}>{item.name}</Text>
-        <Text style={styles.friendStatus}>{item.status}</Text>
+        <Ntext title={item.name} size={16} type='bold' color={colors.black} />
+        <Ntext title={item.status} size={14} color={colors.Placeholdercolor} style={styles.friendStatus}/>
       </View>
       <TouchableOpacity style={styles.actionButton}>
-        <Text style={styles.actionButtonText}>Message</Text>
+        <Ntext title='Message' type='bold' color={colors.white} size={14} />
       </TouchableOpacity>
     </TouchableOpacity>
   );
@@ -49,7 +51,7 @@ const FindFriendsScreen = () => {
         data={filteredFriends}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        ListEmptyComponent={<Text style={styles.noFriendsText}>No friends found.</Text>}
+        ListEmptyComponent={<Ntext title='No friends found.' size={16} color='#888' style={styles.noFriendsText}/>}
       />
     </View>
   );

@@ -138,7 +138,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
               name={iconName}
               type={iconType}
               size={30}
-              color={isFocused ? colors.ThemeBorder : 'white'}
+              color={isFocused ? colors.black : 'white'}
             />
           </CustomTabBarButton>
         ) : (

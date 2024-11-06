@@ -89,7 +89,7 @@ const ProfileEditScreen = () => {
               autoCapitalize="none"
               maxLength={20}
             />
-            <Text style={styles.helperText}>Lowercase, numbers, _, and . allowed</Text>
+            <Ntext title='Lowercase, numbers, _, and . allowed' size={13} color={colors.black} style={styles.helperText} />
 
             {/* Name */}
             <TextInput
@@ -161,7 +161,7 @@ const ProfileEditScreen = () => {
 
             <TouchableOpacity style={styles.saveButton}>
               <LinearGradient colors={['#00C6FF', '#0072FF']} style={styles.saveButtonGradient}>
-                <Text style={styles.saveButtonText}>Save Details</Text>
+                <Ntext title='Save Details' size={18} color={colors.white} type='bold'/>
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -221,8 +221,6 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   helperText: {
-    color: 'black',
-    fontSize: 13,
     marginBottom: 10,
     marginBottom: 20,
   },

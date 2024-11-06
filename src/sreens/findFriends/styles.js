@@ -57,14 +57,7 @@ export const styles = StyleSheet.create({
     textContainer: {
       flex: 1,
     },
-    friendName: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: '#333',
-    },
     friendStatus: {
-      fontSize: 14,
-      color: '#888',
       marginTop: 3,
     },
     actionButton: {
@@ -73,15 +66,8 @@ export const styles = StyleSheet.create({
       paddingHorizontal: 15,
       borderRadius: 5,
     },
-    actionButtonText: {
-      color: '#fff',
-      fontSize: 14,
-      fontWeight: 'bold',
-    },
     noFriendsText: {
       textAlign: 'center',
-      color: '#888',
       marginTop: 20,
-      fontSize: 16,
     },
   });

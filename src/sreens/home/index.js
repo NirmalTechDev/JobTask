@@ -181,10 +181,15 @@ const Home = () => {
     <View style={styles.container}>
       {/* Top Navigation Bar */}
       <View style={styles.navbar}>
-        <Ntext title='AppLogo' size={20} type='bold' color='#000' />
+        <Ntext title='CatChat' size={20} type='bold' color='#000'/>
         <Ntext title='Search...' size={14} color={colors.Placeholdercolor} style={styles.searchBar} />
-        <TouchableOpacity onPress={() => { navigation.navigate('notifiications') }}>
+        <TouchableOpacity onPress={() => { navigation.navigate('notifiications') }} style={{ justifyContent: "center" }}>
           <VectorIcon name="notifications" type={'Ionicons'} size={25} color="#333" />
+          {true &&
+            <View style={styles.chat_Noti_Conte}>
+              <Text style={styles.chat_Noti}>7</Text>
+            </View>
+          }
         </TouchableOpacity>
       </View>
 

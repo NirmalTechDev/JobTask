@@ -67,6 +67,22 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#eee',
   },
+  chat_Noti_Conte: {
+    position:'absolute', 
+    zIndex:1, 
+    right:0, 
+    top:-5 
+  },
+  chat_Noti: {
+    height:15, 
+    width:15,
+    borderRadius:100, 
+    backgroundColor:colors.ThemeBorder, 
+    color:colors.black, 
+    textAlign:'center',
+    fontSize:10,
+    fontWeight:'900',
+  },
   storisContainer:{
     paddingVertical:5,
     borderBottomWidth:0.5,

@@ -152,10 +152,16 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
             onLongPress={onLongPress}
             style={styles.tabItem}
           >
+            {
+              (route.name === 'chat') &&
+                <View style={styles.chat_Noti_Conte}>
+                  <Text style={styles.chat_Noti}>7</Text>
+                </View>
+            }
             <VectorIcon
               name={iconName}
               type={iconType}
-              size={25}
+              size={30}
               color={isFocused ? colors.ThemeBorder : 'gray'}
             />
             {/* <Text style={[styles.tabLabel, { color: isFocused ? colors.ThemeBorder : 'gray' }]}>
@@ -198,6 +204,23 @@ const styles = StyleSheet.create({
   tabItem: {
     alignItems: 'center',
     paddingHorizontal:10,
+  },
+  chat_Noti_Conte: {
+    position:'absolute', 
+    zIndex:1, 
+    right:5, 
+    top:-5 
+  },
+  chat_Noti: {
+    height:18, 
+    width:18,
+    borderRadius:100, 
+    backgroundColor:colors.ThemeBorder, 
+    color:colors.black, 
+    textAlign:'center',
+    textAlignVertical:'center',
+    fontWeight:'900',
+    fontSize:13,
   },
   tabLabel: {
     fontSize: 10,

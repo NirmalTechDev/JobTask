@@ -80,6 +80,7 @@ export const styles = StyleSheet.create({
     backgroundColor:colors.ThemeBorder, 
     color:colors.black, 
     textAlign:'center',
+    textAlignVertical:"center",
     fontSize:10,
     fontWeight:'900',
   },

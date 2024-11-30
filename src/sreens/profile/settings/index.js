@@ -117,9 +117,9 @@ const SettingScreen = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header} onPress={() => { GoBack() }} >
+            <View style={styles.header}>
                 <TouchableOpacity style={styles.settingBack} onPress={() => { GoBack() }} >
-                    <VectorIcon type={'MaterialIcons'} name={'chevron-left'} color='#000' size={25} />
+                    <VectorIcon type={'MaterialIcons'} name={'chevron-left'} color='#000' size={26} />
                     <Ntext title='Settings' color={colors.black} size={18} type='bold' />
                 </TouchableOpacity>
             </View>

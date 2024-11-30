@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from './styles';
 import { Ntext } from '../../components/Ntext';
 import colors from '../../utils/colors';
+import VectorIcon from '../../components/Vectoricon';
+import { useNavigation } from '@react-navigation/native';
 
 // Sample notification data
 const notifications = [
@@ -33,6 +35,11 @@ const notifications = [
 
 export default function NotificationScreen() {
   const [refreshing, setRefreshing] = useState(false);
+  const navigation = useNavigation();
+
+  const GoBack = () => {
+    navigation.goBack();
+  }
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -53,12 +60,19 @@ export default function NotificationScreen() {
 
   return (
     <View style={styles.container}>
-      <Ntext title='Notification' size={24} type='bold' color={colors.black} style={styles.header} />
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.backButton} onPress={() => { GoBack() }}>
+          <VectorIcon type={'MaterialIcons'} name={'chevron-left'} size={26} />
+          <Ntext title='Notification' size={18} type='bold' color={colors.black} style={styles.headerTxt} />
+        </TouchableOpacity>
+      </View>
+
       <FlatList
         data={notifications}
         renderItem={renderItem}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.black} />}
         keyExtractor={(item) => item.id}
+        contentContainerStyle={{ paddingVertical: 10 }}
       />
     </View>
   );

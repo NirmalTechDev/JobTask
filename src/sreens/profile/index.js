@@ -218,10 +218,10 @@ const ProfileScreen = () => {
                         true ?
                             <>
                                 <TouchableOpacity style={[styles.followButton, { backgroundColor: colors.gray }]} onPress={() => { navigation.navigate('editProfile') }}>
-                                    <Ntext title='Edit Profile' color={colors.Placeholdercolor} type='bold' size={15} />
+                                    <Ntext title='Change Info' color={colors.Placeholdercolor} type='bold' size={15} />
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.messageButton}>
-                                    <Ntext title='Share Profile' color={colors.Placeholdercolor} type='bold' size={15} />
+                                    <Ntext title='Spread Profile' color={colors.Placeholdercolor} type='bold' size={15} />
                                 </TouchableOpacity>
                             </>
                             :

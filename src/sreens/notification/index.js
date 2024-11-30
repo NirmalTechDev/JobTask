@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, RefreshControl } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from './styles';
 import { Ntext } from '../../components/Ntext';
@@ -32,11 +32,19 @@ const notifications = [
 ];
 
 export default function NotificationScreen() {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    // Simulated delay for network request
+    setTimeout(() => setRefreshing(false), 2000);
+  };
+
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.notificationCard}>
       <Icon name={item.icon} size={30} color="#3498db" style={styles.icon} />
       <View style={styles.textContainer}>
-        <Ntext title={item.title} size={16} type='bold' color={colors.black}/>
+        <Ntext title={item.title} size={16} type='bold' color={colors.black} />
         <Ntext title={item.description} size={14} color={colors.Placeholdercolor} style={styles.description} />
       </View>
       <Ntext title={item.time} size={12} color='#999' />
@@ -49,6 +57,7 @@ export default function NotificationScreen() {
       <FlatList
         data={notifications}
         renderItem={renderItem}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.black} />}
         keyExtractor={(item) => item.id}
       />
     </View>

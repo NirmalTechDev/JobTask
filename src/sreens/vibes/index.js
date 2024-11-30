@@ -74,8 +74,9 @@
 // export default VibesScreen;
 
 
-import React from 'react';
-import { View, FlatList, StyleSheet, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { View, FlatList, StyleSheet, Dimensions, RefreshControl } from 'react-native';
+import colors from '../../utils/colors';
 
 const data = [
     { id: '1', videoUrl: 'https://your-video-url-1.mp4' },
@@ -86,8 +87,7 @@ const data = [
 
 
 const VibesScreen = () => {
-
-
+    const [refreshing, setRefreshing] = useState(false);
     const Reel = ({ videoUrl }) => {
         return (
             <View style={styles.VideoContainer}>
@@ -104,6 +104,12 @@ const VibesScreen = () => {
         );
     };
 
+    const onRefresh = () => {
+        setRefreshing(true);
+        // Simulated delay for network request
+        setTimeout(() => setRefreshing(false), 2000);
+    };
+
 
     return (
         <FlatList
@@ -113,6 +119,7 @@ const VibesScreen = () => {
             pagingEnabled
             showsVerticalScrollIndicator={false}
             snapToInterval={Dimensions.get('window').height}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.black} />}
             decelerationRate="fast"
         />
     );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  RefreshControl,
 } from 'react-native';
 import VectorIcon from '../../components/Vectoricon'; // Custom icon component
 import { styles } from './styles';
@@ -16,6 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 const ChatScreen = () => {
   // Dummy chat data for the chat inbox screen
   const navigation = useNavigation();
+  const [refreshing, setRefreshing] = useState(false);
   const chats = [
     {
       id: 1,
@@ -124,6 +126,12 @@ const ChatScreen = () => {
     // More chats...
   ];
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    // Simulated delay for network request
+    setTimeout(() => setRefreshing(false), 2000);
+  };
+
   return (
     <View style={styles.container}>
       {/* Top Bar */}
@@ -145,9 +153,13 @@ const ChatScreen = () => {
       </View>
 
       {/* Chat List */}
-      <ScrollView style={styles.chatList}>
+      <ScrollView style={styles.chatList}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.black} />
+        }
+      >
         {chats.map(chat => (
-          <TouchableOpacity key={chat.id} style={styles.chatItem} onPress={() => {navigation.navigate('chatingScreen')}}>
+          <TouchableOpacity key={chat.id} style={styles.chatItem} onPress={() => { navigation.navigate('chatingScreen') }}>
             <Image source={{ uri: chat.profilePic }} style={styles.profilePic} />
             <View style={styles.chatDetails}>
               <Ntext title={chat.name} size={16} type='bold' color={colors.black} />
@@ -157,7 +169,7 @@ const ChatScreen = () => {
               <Ntext title={chat.timestamp} size={12} color='#999' />
               {chat.unreadCount > 0 && (
                 <View style={styles.unreadBadge}>
-                  <Ntext title={chat.unreadCount} size={12} color={colors.black}  />
+                  <Ntext title={chat.unreadCount} size={12} color={colors.black} />
                 </View>
               )}
             </View>

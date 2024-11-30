@@ -87,7 +87,7 @@
 
 
 import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, ScrollView, FlatList, Dimensions, Pressable, Alert } from 'react-native';
+import { View, Image, TouchableOpacity, ScrollView, FlatList, Dimensions, Pressable, Alert, RefreshControl } from 'react-native';
 import VectorIcon from '../../components/Vectoricon';
 import { Ntext } from '../../components/Ntext';
 import { styles } from './styles';
@@ -102,7 +102,8 @@ const FriendsProfileScreen = () => {
     const navigation = useNavigation();
     const posts = [1, 2, 3, 4];
     const reels = [1, 2, 3, 4];
-    const [follow,setFollow] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
+    const [follow, setFollow] = useState('false');
 
     let tabIcon = [
         { name: 'grid-on', type: 'MaterialIcons' },
@@ -111,6 +112,12 @@ const FriendsProfileScreen = () => {
     ];
     const [selectedTab, setSelectedTab] = useState(0);
 
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        // Simulated delay for network request
+        setTimeout(() => setRefreshing(false), 2000);
+    };
 
     const onTabPress = (index) => {
         setSelectedTab(index);
@@ -169,7 +176,9 @@ const FriendsProfileScreen = () => {
                 </Pressable>
             </View>
 
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.black} />
+            }>
                 {/* Cover Image */}
                 <TouchableOpacity style={styles.coverImageContainer} onLongPress={() => { Alert.alert('Jay Dwarikadhish') }}>
                     <Image source={require('../../assets/images/dwarika.jpg')} style={styles.coverImage} />
@@ -211,89 +220,89 @@ const FriendsProfileScreen = () => {
 
                 {/* Action Buttons */}
                 <View style={styles.actionButtonsContainer}>
-                <>
-                    {follow ?
-                        <TouchableOpacity style={[styles.followButton, { backgroundColor: colors.gray }]} onPress={() => {setFollow(false) }}>
-                            <Ntext title='Unfollow' color={colors.Placeholdercolor} type='bold' size={15} />
-                        </TouchableOpacity>
-                        :
-                        <TouchableOpacity style={styles.followButton} onPress={()=>{setFollow(true)}}>
-                            <Ntext title='Following' color={colors.white} type='bold' size={15} />
-                        </TouchableOpacity>
-                    }
+                    <>
+                        {follow ?
+                            <TouchableOpacity style={[styles.followButton, { backgroundColor: colors.gray }]} onPress={() => { setFollow(false) }}>
+                                <Ntext title='Untrack' color={colors.Placeholdercolor} type='bold' size={15} />
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity style={styles.followButton} onPress={() => { setFollow(true) }}>
+                                <Ntext title='Track' color={colors.white} type='bold' size={15} />
+                            </TouchableOpacity>
+                        }
 
-                    <TouchableOpacity style={styles.messageButton}>
-                        <Ntext title='Message' color={colors.ThemeBorder} type='bold' size={15} />
-                    </TouchableOpacity>
-                </>
-                {/* <TouchableOpacity style={styles.dropdownButton}>
+                        <TouchableOpacity style={styles.messageButton}>
+                            <Ntext title='Message' color={colors.ThemeBorder} type='bold' size={15} />
+                        </TouchableOpacity>
+                    </>
+                    {/* <TouchableOpacity style={styles.dropdownButton}>
                         <VectorIcon name={'chevron-down-outline'} type={'Ionicons'} size={20} color={colors.black} />
                     </TouchableOpacity> */}
-        </View>
+                </View>
 
-                {/* Stories */ }
-    <View style={styles.storiesContainer}>
-        <FlatList
-            showsHorizontalScrollIndicator={false}
-            data={[...Array(6)]}
-            horizontal={true}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={(item, index) => {
-                if (false && item.index === 0) {
-                    return (
-                        <TouchableOpacity style={styles.storyItem}>
-                            <View style={styles.addHighlight}>
-                                <VectorIcon name={'add-outline'} type={'Ionicons'} size={30} color={colors.Placeholdercolor} />
-                            </View>
-                            <Ntext title='New' size={12} color={colors.Placeholdercolor} />
-                        </TouchableOpacity>
-                    )
-                } else {
-                    return (
-                        <>
-                            <TouchableOpacity key={item.index} style={styles.storyItem}>
-                                <View style={styles.storyPlaceholder} />
-                                <Ntext title={'Highlight ' + item.index} size={12} color={colors.Placeholdercolor} />
+                {/* Stories */}
+                <View style={styles.storiesContainer}>
+                    <FlatList
+                        showsHorizontalScrollIndicator={false}
+                        data={[...Array(6)]}
+                        horizontal={true}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={(item, index) => {
+                            if (false && item.index === 0) {
+                                return (
+                                    <TouchableOpacity style={styles.storyItem}>
+                                        <View style={styles.addHighlight}>
+                                            <VectorIcon name={'add-outline'} type={'Ionicons'} size={30} color={colors.Placeholdercolor} />
+                                        </View>
+                                        <Ntext title='New' size={12} color={colors.Placeholdercolor} />
+                                    </TouchableOpacity>
+                                )
+                            } else {
+                                return (
+                                    <>
+                                        <TouchableOpacity key={item.index} style={styles.storyItem}>
+                                            <View style={styles.storyPlaceholder} />
+                                            <Ntext title={'Highlight ' + item.index} size={12} color={colors.Placeholdercolor} />
+                                        </TouchableOpacity>
+                                    </>
+                                )
+                            }
+                        }}
+                    />
+                </View>
+
+                {/* Tabs */}
+                <View style={{ flex: 1 }}>
+                    <View style={styles.tabContainer}>
+                        {tabIcon.map((val, ind) => (
+                            <TouchableOpacity
+                                key={ind}
+                                style={[
+                                    styles.tabIconButton,
+                                    selectedTab === ind && { borderColor: colors.black }
+                                ]}
+                                onPress={() => onTabPress(ind)}
+                            >
+                                <VectorIcon name={val.name} type={val.type} size={25} color='black' />
                             </TouchableOpacity>
-                        </>
-                    )
-                }
-            }}
-        />
-    </View>
+                        ))}
+                    </View>
 
-    {/* Tabs */ }
-    <View style={{ flex: 1 }}>
-        <View style={styles.tabContainer}>
-            {tabIcon.map((val, ind) => (
-                <TouchableOpacity
-                    key={ind}
-                    style={[
-                        styles.tabIconButton,
-                        selectedTab === ind && { borderColor: colors.black }
-                    ]}
-                    onPress={() => onTabPress(ind)}
-                >
-                    <VectorIcon name={val.name} type={val.type} size={25} color='black' />
-                </TouchableOpacity>
-            ))}
-        </View>
-
-        {/* Content */}
-        <FlatList
-            ref={(ref) => { flatListRef = ref; }}
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            data={[...Array(3)]}
-            renderItem={renderItem}
-            keyExtractor={(item, index) => index.toString()}
-            onMomentumScrollEnd={(event) => {
-                const index = Math.round(event.nativeEvent.contentOffset.x / deviceWidth);
-                setSelectedTab(index);
-            }}
-        />
-    </View>
+                    {/* Content */}
+                    <FlatList
+                        ref={(ref) => { flatListRef = ref; }}
+                        horizontal
+                        pagingEnabled
+                        showsHorizontalScrollIndicator={false}
+                        data={[...Array(3)]}
+                        renderItem={renderItem}
+                        keyExtractor={(item, index) => index.toString()}
+                        onMomentumScrollEnd={(event) => {
+                            const index = Math.round(event.nativeEvent.contentOffset.x / deviceWidth);
+                            setSelectedTab(index);
+                        }}
+                    />
+                </View>
             </ScrollView >
         </View >
     );

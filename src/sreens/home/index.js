@@ -137,6 +137,7 @@ import {
   Modal,
   FlatList,
   Alert,
+  RefreshControl,
 } from 'react-native';
 import VectorIcon from '../../components/Vectoricon'; // Custom icon component
 import MapView, { Marker } from 'react-native-maps'; // Map component for friend locations
@@ -152,6 +153,7 @@ const profilepic = ['https://instagram.fstv5-1.fna.fbcdn.net/v/t51.2885-19/45483
 const Home = () => {
   const navigation = useNavigation();
   const [mapVisible, setMapVisible] = React.useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
 
   const [markers, setmarkers] = useState([
@@ -173,6 +175,13 @@ const Home = () => {
     // Add more markers here...
   ]);
 
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    // Simulated delay for network request
+    setTimeout(() => setRefreshing(false), 2000);
+  };
+
   const RefreshMap = () => {
     //heare i want to set the code for refress map and refind my currunt location
   }
@@ -181,7 +190,7 @@ const Home = () => {
     <View style={styles.container}>
       {/* Top Navigation Bar */}
       <View style={styles.navbar}>
-        <Ntext title='CatChat' size={20} type='bold' color='#000'/>
+        <Ntext title='CatChat' size={20} type='bold' color='#000' />
         <Ntext title='Search...' size={14} color={colors.Placeholdercolor} style={styles.searchBar} />
         <TouchableOpacity onPress={() => { navigation.navigate('notifiications') }} style={{ justifyContent: "center" }}>
           <VectorIcon name="notifications" type={'Ionicons'} size={25} color="#333" />
@@ -193,7 +202,11 @@ const Home = () => {
         </TouchableOpacity>
       </View>
 
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.black} />
+        }
+      >
         {/* Stories Section */}
         <View style={styles.storisContainer}>
           <FlatList

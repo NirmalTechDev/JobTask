@@ -87,7 +87,7 @@
 
 
 import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, ScrollView, FlatList, Dimensions, Pressable, Alert } from 'react-native';
+import { View, Image, TouchableOpacity, ScrollView, FlatList, Dimensions, Pressable, Alert, RefreshControl } from 'react-native';
 import VectorIcon from '../../components/Vectoricon';
 import { Ntext } from '../../components/Ntext';
 import { styles } from './styles';
@@ -102,6 +102,7 @@ const ProfileScreen = () => {
     const navigation = useNavigation();
     const posts = [1, 2, 3, 4];
     const reels = [1, 2, 3, 4];
+    const [refreshing, setRefreshing] = useState(false);
 
     let tabIcon = [
         { name: 'grid-on', type: 'MaterialIcons' },
@@ -118,6 +119,12 @@ const ProfileScreen = () => {
 
     let flatListRef;
 
+    const onRefresh = () => {
+        setRefreshing(true);
+        // Simulated delay for network request
+        setTimeout(() => setRefreshing(false), 2000);
+    };
+
 
     const renderGrid = (style) => {
         return (
@@ -133,7 +140,7 @@ const ProfileScreen = () => {
             <View style={styles.gridContainer}>
                 {reels.map((_, index) => (
                     <View key={index} style={[style, { justifyContent: 'flex-end' }]} >
-                        <Ntext title={index+1+'M'} color={colors.black} size={13} type='bold' style={{ paddingHorizontal: 5, paddingVertical: 5 }} />
+                        <Ntext title={index + 1 + 'M'} color={colors.black} size={13} type='bold' style={{ paddingHorizontal: 5, paddingVertical: 5 }} />
                     </View>
                 ))}
             </View>
@@ -153,7 +160,6 @@ const ProfileScreen = () => {
 
     return (
         <View style={styles.container}>
-
             {/* Header */}
             <View style={styles.header}>
                 <Ntext title='catchat_official' color='black' size={16} type='bold' />
@@ -164,9 +170,11 @@ const ProfileScreen = () => {
                 </Pressable>
             </View>
 
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.black} />
+            } >
                 {/* Cover Image */}
-                <TouchableOpacity style={styles.coverImageContainer} onLongPress={()=>{Alert.alert('Jay Dwarikadhish')}}>
+                <TouchableOpacity style={styles.coverImageContainer} onLongPress={() => { Alert.alert('Jay Dwarikadhish') }}>
                     <Image source={require('../../assets/images/dwarika.jpg')} style={styles.coverImage} />
                 </TouchableOpacity>
                 {/* Profile Image */}

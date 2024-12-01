@@ -178,7 +178,7 @@ const ProfileScreen = () => {
                 {/* Cover Image */}
                 <TouchableOpacity style={styles.coverImageContainer} onLongPress={() => { Alert.alert('Jay Dwarikadhish') }}>
                     {/* <Image source={require('../../assets/images/dwarika.jpg')} style={styles.coverImage} /> */}
-                    <CoverPhoto coverPhotoUri={require('../../assets/images/dwarika.jpg')} customCoverStyle={{ height: 100 }} />
+                    <CoverPhoto coverPhotoUri={require('../../assets/images/dwarika.jpg')} customCoverStyle={{ height:'100%' }} />
                 </TouchableOpacity>
                 {/* Profile Image */}
                 <View style={styles.profileInfoContainer}>

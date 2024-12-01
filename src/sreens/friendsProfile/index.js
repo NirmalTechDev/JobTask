@@ -94,6 +94,8 @@ import { styles } from './styles';
 import colors from '../../utils/colors';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import LongPressImage from '../../components/profileImageView';
+import CoverPhoto from '../../components/profileCoverImageView';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -181,15 +183,17 @@ const FriendsProfileScreen = () => {
             }>
                 {/* Cover Image */}
                 <TouchableOpacity style={styles.coverImageContainer} onLongPress={() => { Alert.alert('Jay Dwarikadhish') }}>
-                    <Image source={require('../../assets/images/dwarika.jpg')} style={styles.coverImage} />
+                    {/* <Image source={require('../../assets/images/dwarika.jpg')} style={styles.coverImage} /> */}
+                    <CoverPhoto coverPhotoUri={require('../../assets/images/dwarika.jpg')} customCoverStyle={{ height: 100 }} />
                 </TouchableOpacity>
                 {/* Profile Image */}
                 <View style={styles.profileInfoContainer}>
                     <View style={styles.profilePictureContainer}>
-                        <Image
+                        {/* <Image
                             source={require('../../assets/images/my.jpg')} // Add profile picture URI
                             style={styles.profilePicture}
-                        />
+                        /> */}
+                        <LongPressImage imageUri={'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max'} imageStyle={{ height: 80, width: 80 }} />
                         {/* <VectorIcon type={'MaterialIcons'} name={"add-circle"} color={"orange"} style={styles.addIcon} size={20} /> */}
                     </View>
                     {/* blank container */}

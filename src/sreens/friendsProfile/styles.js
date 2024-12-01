@@ -100,43 +100,43 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 12,
         flexDirection: 'row',
-        alignItems:'center',
+        alignItems: 'center',
         shadowColor: colors.shadowColor,
         elevation: 5,
         backgroundColor: colors.white,
-        justifyContent:"space-between",
+        justifyContent: "space-between",
     },
     headerIcons: {
         flexDirection: 'row',
     },
-    coverImageContainer:{
-        height:'13%',
+    coverImageContainer: {
+        height: '13%',
     },
-    coverImage:{
-        height:"100%",
-        width:"100%",
-        resizeMode:'cover'
+    coverImage: {
+        height: "100%",
+        width: "100%",
+        resizeMode: 'cover'
     },
     profileInfoContainer: {
-        height:45,
+        height: 45,
         paddingVertical: 5,
         paddingHorizontal: 16,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:"center",
-        position:'relative',
+        justifyContent: "center",
+        position: 'relative',
     },
     profilePictureContainer: {
         position: 'relative',
         padding: 2,
-        borderRadius: 20,
-        borderWidth: 1,
+        borderRadius: 13,
+        borderWidth: 2,
         borderColor: colors.ThemeBorder,
-        position:"absolute",
-        top:-45,
-        left:16,
-        shadowColor:'black',
-        elevation:5,
+        position: "absolute",
+        top: -45,
+        left: 16,
+        shadowColor: 'black',
+        elevation: 5,
     },
     profilePicture: {
         width: 80,
@@ -165,7 +165,7 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
     stats: {
-        flex:1,
+        flex: 1,
         alignItems: 'center',
     },
     actionButtonsContainer: {
@@ -241,7 +241,7 @@ export const styles = StyleSheet.create({
     gridItem: {
         width: '32.4%',
         height: 110,
-        backgroundColor:colors.ThemeText2,
+        backgroundColor: colors.ThemeText2,
         marginBottom: 3,
         marginRight: 3,
     },

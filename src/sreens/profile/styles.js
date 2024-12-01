@@ -129,14 +129,14 @@ export const styles = StyleSheet.create({
     profilePictureContainer: {
         position: 'relative',
         padding: 2,
-        borderRadius: 20,
-        borderWidth: 1,
+        borderRadius: 13,
+        borderWidth: 2,
         borderColor: colors.ThemeBorder,
         position:"absolute",
         top:-45,
         left:16,
         shadowColor:'black',
-        elevation:5,
+        elevation:2,
     },
     profilePicture: {
         width: 80,

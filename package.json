@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/blur": "^4.4.1",
     "@react-native-community/datetimepicker": "github:react-native-community/datetimepicker",
     "@react-native-firebase/app": "^20.5.0",
     "@react-native-firebase/auth": "^20.5.0",
